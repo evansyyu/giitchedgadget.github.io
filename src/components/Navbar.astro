@@ -50,7 +50,7 @@ import discordIcon from '../assets/icons/discord.svg';
 <!-- Mobile nav overlay: full screen below header, column of nav items, evenly spaced. Dropdowns toggle on tap. -->
 <div
 	id="mobile-nav-overlay"
-	class="fixed inset-0 z-40 flex flex-col pt-24 pb-12 px-6 bg-[#fafafa] dark:bg-neutral-900 opacity-0 pointer-events-none transition-opacity duration-300 sm:hidden"
+	class="fixed inset-0 z-40 flex flex-col pt-24 pb-12 px-6 bg-white dark:bg-neutral-900 opacity-0 pointer-events-none transition-opacity duration-300 sm:hidden"
 	aria-hidden="true"
 >
 	<nav class="flex-1 flex flex-col justify-evenly items-center min-h-0" aria-label="Mobile menu">
@@ -232,6 +232,13 @@ import discordIcon from '../assets/icons/discord.svg';
 			const id = trigger.getAttribute('data-mobile-dropdown');
 			const panel = id ? document.getElementById(id) : null;
 			if (!panel) return;
+			// Close any other open dropdowns so only one is open at a time
+			overlay?.querySelectorAll('.mobile-dropdown.open').forEach((el) => {
+				if (el !== panel) el.classList.remove('open');
+			});
+			overlay?.querySelectorAll('.mobile-nav-trigger[aria-expanded="true"]').forEach((btn) => {
+				if (btn !== trigger) btn.setAttribute('aria-expanded', 'false');
+			});
 			const isExpanded = panel.classList.toggle('open');
 			trigger.setAttribute('aria-expanded', String(isExpanded));
 		});
