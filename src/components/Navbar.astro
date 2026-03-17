@@ -4,8 +4,8 @@ import moonIcon from '../assets/icons/moon.svg';
 import discordIcon from '../assets/icons/discord.svg';
 ---
 
-<!-- Mobile: burger top left, logo top center (same y padding). Visible only below sm. -->
-<header class="relative z-50 w-full py-6 flex items-center justify-between px-6 sm:hidden" aria-label="Mobile header">
+<!-- Mobile: burger top left, logo top center (same y padding). Fixed so content never overlaps. -->
+<header class="fixed top-0 left-0 right-0 z-50 w-full py-6 flex items-center justify-between px-6 sm:hidden bg-white dark:bg-neutral-900" aria-label="Mobile header">
 	<button
 		id="nav-burger"
 		type="button"
@@ -107,7 +107,7 @@ import discordIcon from '../assets/icons/discord.svg';
 		<img src="/logo.svg" alt="" class="h-8 w-auto block dark:invert" />
 	</a>
 	<ul class="flex flex-1 list-none m-0 p-0 items-center justify-center gap-x-0 sm:gap-x-[clamp(2rem,5vw,12rem)]">
-		<li class="min-w-[8rem] text-center">
+		<li class="min-w-32 text-center">
 			<a
 				href="/"
 				class="block font-refrigerator font-light text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline hover:underline hover:text-gray-400 dark:hover:text-neutral-400 text-center"
@@ -115,7 +115,7 @@ import discordIcon from '../assets/icons/discord.svg';
 				Home
 			</a>
 		</li>
-		<li class="relative group inline-block m-0 p-0 min-w-[8rem] text-center">
+		<li class="relative group inline-block m-0 p-0 min-w-32 text-center">
 			<a
 				class="block font-refrigerator font-light text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline text-center"
 				aria-haspopup="true"
@@ -132,7 +132,7 @@ import discordIcon from '../assets/icons/discord.svg';
 				<li class="m-0"><a href="" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">KanjiCrypt</a></li>
 			</ul>
 		</li>
-		<li class="relative group inline-block m-0 p-0 min-w-[8rem] text-center">
+		<li class="relative group inline-block m-0 p-0 min-w-32 text-center">
 			<a
 				class="block font-refrigerator font-light text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline text-center"
 				aria-haspopup="true"
@@ -169,7 +169,7 @@ import discordIcon from '../assets/icons/discord.svg';
 				<li class="m-0"><a href="/chinese-vocabulary-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Chinese Vocabulary</a></li>
 			</ul>
 		</li>
-		<li class="relative group inline-block m-0 p-0 min-w-[8rem] text-center">
+		<li class="relative group inline-block m-0 p-0 min-w-32 text-center">
 			<a
 				class="block font-refrigerator font-light text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline text-center"
 				aria-haspopup="true"
@@ -219,6 +219,8 @@ import discordIcon from '../assets/icons/discord.svg';
 			burger.setAttribute('aria-expanded', String(isOpen));
 			overlay.classList.toggle('open', isOpen);
 			overlay.setAttribute('aria-hidden', String(!isOpen));
+			document.body.classList.toggle('overflow-hidden', isOpen);
+			document.documentElement.classList.toggle('overflow-hidden', isOpen);
 			if (!isOpen) {
 				overlay.querySelectorAll('.mobile-dropdown.open').forEach((el) => el.classList.remove('open'));
 				overlay.querySelectorAll('.mobile-nav-trigger[aria-expanded="true"]').forEach((btn) => btn.setAttribute('aria-expanded', 'false'));

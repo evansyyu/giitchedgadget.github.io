@@ -5,9 +5,9 @@ import amyImage from '../assets/images/amy.png';
 ---
 
 <Layout title="僕のこと">
-	<div class="h-screen flex flex-col overflow-hidden">
+	<div class="min-h-screen min-h-[100svh] flex flex-col overflow-hidden">
 		<Navbar />
-		<div class="flex flex-1 min-h-0 items-center justify-center">
+		<div class="flex flex-1 min-h-0 items-center justify-center pt-[5.5rem] sm:pt-0">
 			<div class="grid grid-cols-1 md:grid-cols-2 max-w-[1200px] w-full gap-x-4 px-2">
 				<div class="home-hero-image flex items-center justify-center min-h-0">
 					<img src={amyImage.src} alt="Amy" class="w-full h-auto max-h-[50vh] md:max-h-none max-w-[600px] md:max-w-none rounded-sm md:rounded-lg saturate-20 dark:saturate-0 dark:invert" />
