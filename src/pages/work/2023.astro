@@ -1,0 +1,32 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import WorkGallery from '../../components/work/WorkGallery.astro';
+
+const items = [
+	{
+		type: 'sketchfab' as const,
+		embedUrl: 'https://sketchfab.com/models/1df1382fa30745ddac179c1b9f558cc3/embed?ui_theme=dark',
+		title: 'Genji Roblox UGC',
+	},
+	{
+		type: 'sketchfab' as const,
+		embedUrl: 'https://sketchfab.com/models/5f78735e51bd4783b521f4d88582b81f/embed?ui_theme=dark',
+		title: "Mei's Backpack Roblox UGC",
+	},
+	{
+		type: 'sketchfab' as const,
+		embedUrl: 'https://sketchfab.com/models/1e148fe2a8044a669fec136fde9540ec/embed?ui_theme=dark',
+		title: 'Reaper Roblox UGC',
+	},
+];
+---
+
+<Layout title="成果。">
+	<div class="min-h-screen flex flex-col">
+		<Navbar />
+		<main class="flex-1 flex justify-center">
+			<WorkGallery items={items} year="2023" />
+		</main>
+	</div>
+</Layout>

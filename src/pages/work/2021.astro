@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import WorkGallery from '../../components/work/WorkGallery.astro';
+
+const assetModules = import.meta.glob<{ default: { src: string } | string }>('../../assets/work/2021/*', { eager: true });
+const assetUrls: Record<string, string> = {};
+for (const path in assetModules) {
+	const name = path.replace(/^.*\//, '');
+	const mod = assetModules[path].default;
+	assetUrls[name] = typeof mod === 'string' ? mod : mod.src;
+}
+
+const items = [
+	{ type: 'image' as const, src: 'turret.png', alt: 'Turret' },
+	{ type: 'image' as const, src: 'cadet.png', alt: 'Cadet' },
+	{ type: 'image' as const, src: 'solar.png', alt: 'Solar' },
+	{ type: 'image' as const, src: 'sun.png', alt: 'Sun' },
+	{ type: 'image' as const, src: 'hiddenwave.png', alt: 'Hiddenwave' },
+	{ type: 'image' as const, src: 'zombies.png', alt: 'Zombies' },
+];
+---
+
+<Layout title="成果。">
+	<div class="min-h-screen flex flex-col">
+		<Navbar />
+		<main class="flex-1 flex justify-center">
+			<WorkGallery items={items} year="2021" assetUrls={assetUrls} />
+		</main>
+	</div>
+</Layout>

@@ -1,0 +1,246 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="Japanese Conjugation Practice">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" slot="head" />
+  <div class="min-h-screen flex flex-col">
+    <Navbar />
+    <main class="practice-page flex-1 flex flex-col items-center px-4 py-6 md:py-10 lg:py-12 xl:py-14 gap-8 lg:gap-10 xl:gap-12 font-['Roboto',sans-serif]">
+      <h1 class="text-2xl lg:text-3xl xl:text-4xl font-normal text-[#333] dark:text-neutral-200">Japanese Conjugation Practice</h1>
+
+      <!-- Practice card -->
+      <div id="card" class="relative w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6 md:p-10 lg:p-12 xl:p-14 flex flex-col items-center gap-6 lg:gap-8 min-h-[420px] lg:min-h-[480px]">
+        <div class="flex flex-col items-center gap-2 lg:gap-3 mt-4 lg:mt-6">
+          <ruby id="word" class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-[#333] dark:text-neutral-100 font-['Noto_Serif_JP',serif]"></ruby>
+          <p id="definition" class="text-lg md:text-xl lg:text-2xl text-neutral-600 dark:text-neutral-400 text-center"></p>
+          <p id="type" class="text-sm lg:text-base text-neutral-500 dark:text-neutral-500 text-center"></p>
+        </div>
+        <p id="targetInflections" class="text-base md:text-lg lg:text-xl text-neutral-700 dark:text-neutral-300 text-center tracking-wide mt-2 lg:mt-4"></p>
+
+        <!-- Answer feedback -->
+        <div id="answerBox" class="hidden w-full max-w-md lg:max-w-lg rounded-xl py-4 px-5 lg:py-5 lg:px-6 text-center my-2 lg:my-4">
+          <p id="result" class="text-xl lg:text-2xl font-medium text-white"></p>
+          <p id="correctAnswer" class="text-lg lg:text-xl text-white/90 mt-2 lg:mt-3"></p>
+        </div>
+
+        <!-- Input -->
+        <div class="w-full max-w-md lg:max-w-lg flex flex-col items-center gap-3 lg:gap-4 mt-auto pt-4 lg:pt-6">
+          <input
+            type="text"
+            id="textbox"
+            autocomplete="off"
+            class="w-full text-center text-lg lg:text-xl py-2.5 lg:py-3 px-5 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-[#333] dark:text-neutral-100 outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 transition"
+          />
+          <p id="bottom" class="hidden text-sm lg:text-base text-neutral-500 dark:text-neutral-400">Press any key to continue</p>
+        </div>
+
+        <!-- Options toggle: below input to avoid overlap on small screens -->
+        <button
+          id="optionsBtn"
+          type="button"
+          class="mt-4 lg:mt-6 text-sm lg:text-base py-2 px-4 lg:py-2.5 lg:px-5 rounded-xl bg-neutral-200 dark:bg-neutral-700 text-[#333] dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition"
+        >Options</button>
+      </div>
+
+      <!-- Options panel -->
+      <div id="optionsPanel" class="hidden w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6 md:p-8 lg:p-10 xl:p-12">
+        <h2 class="text-xl lg:text-2xl font-normal text-center text-[#333] dark:text-neutral-200 mb-6 lg:mb-8">Options</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-8 text-sm lg:text-base text-[#333] dark:text-neutral-200">
+          <!-- Verb types -->
+          <div>
+            <p class="font-medium mb-2 text-base lg:text-lg">Verb Types</p>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-word="verbIchidan" checked class="accent-neutral-600 w-4 h-4" />Ichidan verbs</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-word="verbす" checked class="accent-neutral-600 w-4 h-4" />す - Godan</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-word="verbく" checked class="accent-neutral-600 w-4 h-4" />く/ぐ - Godan</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-word="verbむ" checked class="accent-neutral-600 w-4 h-4" />む/ぶ/ぬ - Godan</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-word="verbう" checked class="accent-neutral-600 w-4 h-4" />う/つ/る - Godan</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-word="verbException" checked class="accent-neutral-600 w-4 h-4" />Irregular verbs</label>
+            <hr class="my-3 border-neutral-300 dark:border-neutral-600" />
+            <p class="font-medium mb-2 text-base lg:text-lg">Adjective Types</p>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-word="adjい" checked class="accent-neutral-600 w-4 h-4" />い-adjectives</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-word="adjな" checked class="accent-neutral-600 w-4 h-4" />な-adjectives</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-word="adjException" checked class="accent-neutral-600 w-4 h-4" />Irregular adj.</label>
+          </div>
+
+          <!-- Verb forms -->
+          <div>
+            <p class="font-medium mb-2 text-base lg:text-lg">Verb Forms</p>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vform="potential" checked class="accent-neutral-600 w-4 h-4" />Potential</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vform="passive" checked class="accent-neutral-600 w-4 h-4" />Passive</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vform="causative" checked class="accent-neutral-600 w-4 h-4" />Causative</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vform="causativePassive" checked class="accent-neutral-600 w-4 h-4" />Causative-Passive</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vform="imperative" checked class="accent-neutral-600 w-4 h-4" />Imperative</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vform="volitional" checked class="accent-neutral-600 w-4 h-4" />Volitional</label>
+            <hr class="my-3 border-neutral-300 dark:border-neutral-600" />
+            <p class="font-medium mb-2 text-base lg:text-lg">Tense</p>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vtense="present" checked class="accent-neutral-600 w-4 h-4" />Present</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vtense="past" checked class="accent-neutral-600 w-4 h-4" />Past</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vtense="te" checked class="accent-neutral-600 w-4 h-4" />て-form</label>
+            <hr class="my-3 border-neutral-300 dark:border-neutral-600" />
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vpol="affirmative" checked class="accent-neutral-600 w-4 h-4" />Affirmative</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vpol="negative" checked class="accent-neutral-600 w-4 h-4" />Negative</label>
+            <hr class="my-3 border-neutral-300 dark:border-neutral-600" />
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vformal="casual" checked class="accent-neutral-600 w-4 h-4" />Casual</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-vformal="formal" checked class="accent-neutral-600 w-4 h-4" />Formal</label>
+          </div>
+
+          <!-- Adj forms + furigana -->
+          <div>
+            <p class="font-medium mb-2 text-base lg:text-lg">Adjective Forms</p>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-atense="present" checked class="accent-neutral-600 w-4 h-4" />Present</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-atense="past" checked class="accent-neutral-600 w-4 h-4" />Past</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-atense="te" checked class="accent-neutral-600 w-4 h-4" />て-form</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-aform="adverb" checked class="accent-neutral-600 w-4 h-4" />Adverb</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-aform="nominalized" checked class="accent-neutral-600 w-4 h-4" />Nominalized</label>
+            <hr class="my-3 border-neutral-300 dark:border-neutral-600" />
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-apol="affirmative" checked class="accent-neutral-600 w-4 h-4" />Affirmative</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-apol="negative" checked class="accent-neutral-600 w-4 h-4" />Negative</label>
+            <hr class="my-3 border-neutral-300 dark:border-neutral-600" />
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-aformal="casual" checked class="accent-neutral-600 w-4 h-4" />Casual</label>
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-aformal="formal" checked class="accent-neutral-600 w-4 h-4" />Formal</label>
+            <hr class="my-3 border-neutral-300 dark:border-neutral-600" />
+            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" id="furiganaCheck" checked class="accent-neutral-600 w-4 h-4" />Show furigana</label>
+          </div>
+        </div>
+        <div class="flex justify-center mt-6 lg:mt-8">
+          <button id="optionsBack" type="button" class="text-sm lg:text-base py-2 px-6 rounded-xl bg-neutral-200 dark:bg-neutral-700 text-[#333] dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition">Back</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  import { words } from "../data/jcp/words";
+  import {
+    conjugate,
+    generateVerbConjugation,
+    generateAdjConjugation,
+    describeConjugation,
+    describeType,
+    defaultQuizConfig,
+    type Word,
+    type ConjugationRequest,
+    type QuizConfig,
+  } from "../lib/conjugation";
+  import { convertToHiragana } from "../lib/romaji";
+
+  const wordEl = document.getElementById("word")!;
+  const defEl = document.getElementById("definition")!;
+  const typeEl = document.getElementById("type")!;
+  const inflEl = document.getElementById("targetInflections")!;
+  const answerBox = document.getElementById("answerBox")!;
+  const resultEl = document.getElementById("result")!;
+  const correctEl = document.getElementById("correctAnswer")!;
+  const textbox = document.getElementById("textbox") as HTMLInputElement;
+  const bottomEl = document.getElementById("bottom")!;
+  const optionsBtn = document.getElementById("optionsBtn")!;
+  const optionsPanel = document.getElementById("optionsPanel")!;
+  const optionsBack = document.getElementById("optionsBack")!;
+  const furiganaCheck = document.getElementById("furiganaCheck") as HTMLInputElement;
+
+  const config: QuizConfig = defaultQuizConfig();
+
+  function readConfig() {
+    config.verbTypes = [...document.querySelectorAll<HTMLInputElement>("[data-word]:checked")].map((e) => e.dataset.word!);
+    config.verbForms = [...document.querySelectorAll<HTMLInputElement>("[data-vform]:checked")].map((e) => e.dataset.vform!) as any;
+    config.verbTenses = [...document.querySelectorAll<HTMLInputElement>("[data-vtense]:checked")].map((e) => e.dataset.vtense!) as any;
+    config.verbPolarity = [...document.querySelectorAll<HTMLInputElement>("[data-vpol]:checked")].map((e) => e.dataset.vpol!) as any;
+    config.verbFormality = [...document.querySelectorAll<HTMLInputElement>("[data-vformal]:checked")].map((e) => e.dataset.vformal!) as any;
+    config.adjTypes = config.verbTypes.filter((t) => t.startsWith("adj"));
+    config.adjForms = [...document.querySelectorAll<HTMLInputElement>("[data-aform]:checked")].map((e) => e.dataset.aform!) as any;
+    config.adjTenses = [...document.querySelectorAll<HTMLInputElement>("[data-atense]:checked")].map((e) => e.dataset.atense!) as any;
+    config.adjPolarity = [...document.querySelectorAll<HTMLInputElement>("[data-apol]:checked")].map((e) => e.dataset.apol!) as any;
+    config.adjFormality = [...document.querySelectorAll<HTMLInputElement>("[data-aformal]:checked")].map((e) => e.dataset.aformal!) as any;
+    config.furigana = furiganaCheck.checked;
+  }
+
+  function getRandomWord(): Word {
+    const allTypes = [...new Set([...config.verbTypes, ...config.adjTypes])];
+    const pool = allTypes.flatMap((t) => (words as any)[t] ?? []);
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  let currentHandler: ((e: KeyboardEvent) => void) | null = null;
+
+  function question() {
+    readConfig();
+    textbox.disabled = false;
+    textbox.value = "";
+    textbox.focus();
+    answerBox.classList.add("hidden");
+    bottomEl.classList.add("hidden");
+    typeEl.textContent = "";
+
+    const word = getRandomWord();
+    const isVerb = word.type === "ru" || word.type === "u" || word.type === "exv";
+    const conj: ConjugationRequest = isVerb
+      ? generateVerbConjugation(config)
+      : generateAdjConjugation(config);
+    const answer = conjugate(word, conj);
+
+    wordEl.innerHTML = word.kanji;
+    defEl.textContent = word.eng;
+    inflEl.textContent = describeConjugation(conj);
+    manageFurigana();
+
+    if (currentHandler) document.removeEventListener("keyup", currentHandler);
+    currentHandler = (e: KeyboardEvent) => {
+      if (e.key !== "Enter") return;
+      const val = textbox.value;
+      textbox.value = "";
+      textbox.disabled = true;
+      answerBox.classList.remove("hidden");
+      bottomEl.classList.remove("hidden");
+      typeEl.textContent = describeType(word);
+
+      if (val === answer) {
+        answerBox.className = "w-full max-w-md rounded-xl py-3 px-5 text-center bg-emerald-500";
+        resultEl.textContent = "Correct";
+        correctEl.textContent = answer + " ○";
+      } else {
+        answerBox.className = "w-full max-w-md rounded-xl py-3 px-5 text-center bg-red-500";
+        resultEl.textContent = (val || "No answer") + " ×";
+        correctEl.textContent = answer + " ○";
+      }
+      document.removeEventListener("keyup", currentHandler!);
+      currentHandler = null;
+
+      const resetHandler = (ev: KeyboardEvent | MouseEvent) => {
+        document.removeEventListener("keyup", resetHandler);
+        document.removeEventListener("mouseup", resetHandler);
+        question();
+      };
+      document.addEventListener("keyup", resetHandler);
+      document.addEventListener("mouseup", resetHandler);
+    };
+    document.addEventListener("keyup", currentHandler);
+  }
+
+  function manageFurigana() {
+    const rts = document.querySelectorAll("rt");
+    rts.forEach((rt) => {
+      (rt as HTMLElement).style.display = config.furigana ? "" : "none";
+    });
+  }
+
+  textbox.addEventListener("input", () => {
+    textbox.value = convertToHiragana(textbox.value);
+  });
+
+  optionsBtn.addEventListener("click", () => {
+    optionsPanel.classList.toggle("hidden");
+    textbox.disabled = !optionsPanel.classList.contains("hidden");
+    if (optionsPanel.classList.contains("hidden")) textbox.focus();
+  });
+  optionsBack.addEventListener("click", () => {
+    optionsPanel.classList.add("hidden");
+    textbox.disabled = false;
+    textbox.focus();
+  });
+  furiganaCheck.addEventListener("change", manageFurigana);
+
+  question();
+</script>

@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import amyImage from '../assets/images/amy.png';
+---
+
+<Layout title="僕のこと">
+	<div class="h-screen flex flex-col overflow-hidden">
+		<Navbar />
+		<div class="flex flex-1 min-h-0 items-center justify-center">
+			<div class="grid grid-cols-1 md:grid-cols-2 max-w-[1200px] w-full gap-x-4 px-2">
+				<div class="home-hero-image flex items-center justify-center min-h-0">
+					<img src={amyImage.src} alt="Amy" class="w-full h-auto max-h-[50vh] md:max-h-none max-w-[600px] md:max-w-none rounded-sm md:rounded-lg saturate-20 dark:saturate-0 dark:invert" />
+				</div>
+				<div class="home-hero-text flex flex-col justify-between min-h-0 py-8 md:py-12 text-center md:text-left">
+					<span class="text-fluid-hero">hi</span>
+					<span class="text-fluid-hero">im evans</span>
+					<span class="text-fluid-hero">he/him</span>
+					<span class="text-fluid-hero">06</span>
+					<span class="text-fluid-hero">intj</span>
+					<span class="text-fluid-hero">en/cn/jp</span>
+					<span class="text-fluid-hero">check out my projects or something</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</Layout>

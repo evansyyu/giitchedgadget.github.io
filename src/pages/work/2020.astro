@@ -1,0 +1,67 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import WorkGallery from '../../components/work/WorkGallery.astro';
+
+const assetModules = import.meta.glob<{ default: { src: string } | string }>('../../assets/work/2020/*', { eager: true });
+const assetUrls: Record<string, string> = {};
+for (const path in assetModules) {
+	const name = path.replace(/^.*\//, '');
+	const mod = assetModules[path].default;
+	assetUrls[name] = typeof mod === 'string' ? mod : mod.src;
+}
+
+const items = [
+	{
+		type: 'imageWithCaption' as const,
+		src: 'harbor.jpg',
+		alt: 'Harbor TDS',
+		href: 'https://www.roblox.com/games/5889982268/Harbor-TDS',
+		caption: 'TDS Map Submission - Harbor by GlitchedGadget, rhyssko',
+	},
+	{
+		type: 'imageWithCaption' as const,
+		src: '52.jpg',
+		alt: 'Area 52',
+		href: 'https://www.roblox.com/games/6748658559/Area-52',
+		caption: 'TDS Map Submission - Area 51 by GlitchedGadget, rhyssko, KnownSH',
+	},
+	{
+		type: 'imageWithCaption' as const,
+		src: 'sakura.jpg',
+		alt: 'Sakura Cliffs',
+		href: 'https://www.roblox.com/games/14877702874/Sakura-Cliffs',
+		caption: 'TDS Map Submission - Sakura Cliffs by GlitchedGadget, Peritus_Elit',
+	},
+	{
+		type: 'imageWithCaption' as const,
+		src: 'canyon.jpg',
+		alt: 'Canyon Run',
+		href: 'https://www.roblox.com/games/5705330437/GlitchedGadgets-Place-Number-16',
+		caption: 'TDS Map Submission - Canyon Run',
+	},
+	{
+		type: 'imageWithCaption' as const,
+		src: 'temple.jpg',
+		alt: 'Forlorn Temple',
+		href: 'https://www.roblox.com/games/3898959773/Forlorn-Temple',
+		caption: 'TDS Map Submission - Forlorn Temple',
+	},
+	{
+		type: 'imageWithCaption' as const,
+		src: 'wasteland.png',
+		alt: 'Glacial Wasteland',
+		href: 'https://www.roblox.com/games/3830565445/Glacial-Wasteland',
+		caption: 'TDS Map Submission - Glacial Wasteland',
+	},
+];
+---
+
+<Layout title="成果。">
+	<div class="min-h-screen flex flex-col">
+		<Navbar />
+		<main class="flex-1 flex justify-center">
+			<WorkGallery items={items} year="2020" assetUrls={assetUrls} />
+		</main>
+	</div>
+</Layout>

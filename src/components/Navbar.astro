@@ -1,0 +1,275 @@
+---
+import sunIcon from '../assets/icons/sun.svg';
+import moonIcon from '../assets/icons/moon.svg';
+import discordIcon from '../assets/icons/discord.svg';
+---
+
+<!-- Mobile: burger top left, logo top center (same y padding). Visible only below sm. -->
+<header class="relative z-50 w-full py-6 flex items-center justify-between px-6 sm:hidden" aria-label="Mobile header">
+	<button
+		id="nav-burger"
+		type="button"
+		class="nav-burger shrink-0 w-8 h-[26px] border-0 bg-transparent p-0 cursor-pointer"
+		aria-label="Toggle menu"
+		aria-expanded="false"
+	>
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
+	<a
+		href="/"
+		class="absolute left-1/2 -translate-x-1/2 inline-block"
+		aria-label="Home"
+	>
+		<img src="/logo.svg" alt="" class="h-10 w-auto block dark:invert" />
+	</a>
+	<div class="flex items-center gap-3 shrink-0 w-28 justify-end">
+		<div class="relative discord-copy-wrap">
+			<button
+				type="button"
+				class="discord-copy-btn group p-2 rounded-full border-0 cursor-pointer bg-transparent"
+				aria-label="Copy Discord"
+				data-copy="your_username"
+			>
+				<img src={typeof discordIcon === 'string' ? discordIcon : discordIcon.src} alt="" class="w-8 h-8 block dark:invert transition-opacity duration-200 group-hover:opacity-60" />
+			</button>
+			<span class="popover absolute block top-full left-1/2 -translate-x-1/2 mt-1.5 py-2.5 px-5 rounded-[10px] bg-black text-[whitesmoke] font-mono z-5 opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out whitespace-nowrap" aria-live="polite">Copied!</span>
+		</div>
+		<button
+			type="button"
+			class="dark-mode-toggle group p-2 rounded-full border-0 cursor-pointer bg-transparent"
+			aria-label="Toggle dark mode"
+		>
+			<img src={typeof sunIcon === 'string' ? sunIcon : sunIcon.src} alt="" class="sun-icon w-8 h-8 block dark:hidden transition-opacity duration-200 group-hover:opacity-60" aria-hidden="true" />
+			<img src={typeof moonIcon === 'string' ? moonIcon : moonIcon.src} alt="" class="moon-icon w-8 h-8 hidden dark:block dark:invert transition-opacity duration-200 group-hover:opacity-60" aria-hidden="true" />
+		</button>
+	</div>
+</header>
+
+<!-- Mobile nav overlay: full screen below header, column of nav items, evenly spaced. Dropdowns toggle on tap. -->
+<div
+	id="mobile-nav-overlay"
+	class="fixed inset-0 z-40 flex flex-col pt-24 pb-12 px-6 bg-[#fafafa] dark:bg-neutral-900 opacity-0 pointer-events-none transition-opacity duration-300 sm:hidden"
+	aria-hidden="true"
+>
+	<nav class="flex-1 flex flex-col justify-evenly items-center min-h-0" aria-label="Mobile menu">
+		<ul class="list-none m-0 p-0 flex flex-col justify-evenly items-center gap-4 flex-1 min-h-0 w-full max-w-md">
+			<li class="flex flex-col gap-2 items-center">
+				<a href="/" class="mobile-nav-main-item mobile-nav-link font-refrigerator font-light text-[#333] dark:text-neutral-200 text-4xl py-2 no-underline hover:underline text-center">Home</a>
+			</li>
+			<li class="flex flex-col gap-2 items-center">
+				<button type="button" class="mobile-nav-main-item mobile-nav-trigger font-refrigerator font-light text-[#333] dark:text-neutral-200 text-4xl py-2 text-center bg-transparent border-0 cursor-pointer hover:underline" aria-expanded="false" aria-controls="mobile-dropdown-projects" data-mobile-dropdown="mobile-dropdown-projects">Projects</button>
+				<ul id="mobile-dropdown-projects" class="mobile-dropdown list-none m-0 space-y-1 overflow-hidden max-h-0 opacity-0 transition-all duration-300 flex flex-col items-center" aria-label="Projects submenu">
+					<li><a href="" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">tsundoku reader</a></li>
+					<li><a href="" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">komorebi</a></li>
+					<li><a href="" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">KanjiCrypt</a></li>
+				</ul>
+			</li>
+			<li class="flex flex-col gap-2 items-center">
+				<button type="button" class="mobile-nav-main-item mobile-nav-trigger font-refrigerator font-light text-[#333] dark:text-neutral-200 text-4xl py-2 text-center bg-transparent border-0 cursor-pointer hover:underline" aria-expanded="false" aria-controls="mobile-dropdown-work" data-mobile-dropdown="mobile-dropdown-work">Work (old)</button>
+				<ul id="mobile-dropdown-work" class="mobile-dropdown list-none m-0 space-y-1 overflow-hidden max-h-0 opacity-0 transition-all duration-300 flex flex-col items-center" aria-label="Work submenu">
+					<li><a href="/work/2023" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">2023</a></li>
+					<li><a href="/work/2022" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">2022</a></li>
+					<li><a href="/work/2021" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">2021</a></li>
+					<li><a href="/work/2020" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">2020</a></li>
+					<li><a href="/cv" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">CV</a></li>
+				</ul>
+			</li>
+			<li class="flex flex-col gap-2 items-center">
+				<button type="button" class="mobile-nav-main-item mobile-nav-trigger font-refrigerator font-light text-[#333] dark:text-neutral-200 text-4xl py-2 text-center bg-transparent border-0 cursor-pointer hover:underline" aria-expanded="false" aria-controls="mobile-dropdown-language" data-mobile-dropdown="mobile-dropdown-language">Language</button>
+				<ul id="mobile-dropdown-language" class="mobile-dropdown list-none m-0 space-y-1 overflow-hidden max-h-0 opacity-0 transition-all duration-300 flex flex-col items-center" aria-label="Language submenu">
+					<li><a href="/japanese-conjugation-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Japanese Conjugation</a></li>
+					<li><a href="/japanese-vocabulary-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Japanese Vocabulary</a></li>
+					<li><a href="/japanese-kana-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Japanese Kana</a></li>
+					<li><a href="/chinese-vocabulary-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Chinese Vocabulary</a></li>
+				</ul>
+			</li>
+			<li class="flex flex-col gap-2 items-center">
+				<button type="button" class="mobile-nav-main-item mobile-nav-trigger font-refrigerator font-light text-[#333] dark:text-neutral-200 text-4xl py-2 text-center bg-transparent border-0 cursor-pointer hover:underline" aria-expanded="false" aria-controls="mobile-dropdown-elsewhere" data-mobile-dropdown="mobile-dropdown-elsewhere">Elsewhere</button>
+				<ul id="mobile-dropdown-elsewhere" class="mobile-dropdown list-none m-0 space-y-1 overflow-hidden max-h-0 opacity-0 transition-all duration-300 flex flex-col items-center" aria-label="Elsewhere submenu">
+					<li><a href="https://open.spotify.com/user/0f8iwn8344o15iyex20no2u7y?si=4a56f7a4cd194efc" target="_blank" rel="noopener noreferrer" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Spotify</a></li>
+					<li><a href="https://www.roblox.com/users/126989919/profile" target="_blank" rel="noopener noreferrer" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Roblox</a></li>
+					<li><a href="https://enka.network/u/620288461/" target="_blank" rel="noopener noreferrer" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Enka</a></li>
+				</ul>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<!-- Desktop: full nav. Hidden below sm, visible from sm. -->
+<nav id="navbar" class="w-full p-6 hidden sm:flex items-center" aria-label="Main">
+	<a
+		href="/"
+		class="shrink-0 inline-block transition-transform duration-300 scale-100 hover:animate-[logo-hover_2s_ease-in-out_infinite]"
+		aria-label="Home"
+	>
+		<img src="/logo.svg" alt="" class="h-8 w-auto block dark:invert" />
+	</a>
+	<ul class="flex flex-1 list-none m-0 p-0 items-center justify-center gap-x-0 sm:gap-x-[clamp(2rem,5vw,12rem)]">
+		<li class="min-w-[8rem] text-center">
+			<a
+				href="/"
+				class="block font-refrigerator font-light text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline hover:underline hover:text-gray-400 dark:hover:text-neutral-400 text-center"
+			>
+				Home
+			</a>
+		</li>
+		<li class="relative group inline-block m-0 p-0 min-w-[8rem] text-center">
+			<a
+				class="block font-refrigerator font-light text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline text-center"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+				Projects
+			</a>
+			<ul
+				class="absolute left-1/2 top-full -translate-x-1/2 min-w-[180px] m-0 p-0 list-none bg-[#f9f9f9] dark:bg-neutral-800 shadow-[0_8px_16px_0_rgba(0,0,0,0.2)] z-10 leading-[0.7] opacity-0 invisible -translate-y-2.5 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:visible group-hover:-translate-x-1/2 group-hover:translate-y-0"
+				aria-label="Projects submenu"
+			>
+				<li class="m-0"><a href="" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">tsundoku reader</a></li>
+				<li class="m-0"><a href="" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">komorebi</a></li>
+				<li class="m-0"><a href="" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">KanjiCrypt</a></li>
+			</ul>
+		</li>
+		<li class="relative group inline-block m-0 p-0 min-w-[8rem] text-center">
+			<a
+				class="block font-refrigerator font-light text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline text-center"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+				Work (old)
+			</a>
+			<ul
+				class="absolute left-1/2 top-full -translate-x-1/2 min-w-[180px] m-0 p-0 list-none bg-[#f9f9f9] dark:bg-neutral-800 shadow-[0_8px_16px_0_rgba(0,0,0,0.2)] z-10 leading-[0.7] opacity-0 invisible -translate-y-2.5 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:visible group-hover:-translate-x-1/2 group-hover:translate-y-0"
+				aria-label="Work submenu"
+			>
+				<li class="m-0"><a href="/work/2023" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">2023</a></li>
+				<li class="m-0"><a href="/work/2022" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">2022</a></li>
+				<li class="m-0"><a href="/work/2021" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">2021</a></li>
+				<li class="m-0"><a href="/work/2020" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">2020</a></li>
+				<li class="m-0"><a href="/cv" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">CV</a></li>
+			</ul>
+		</li>
+		<li class="relative group inline-block m-0 p-0 min-w-32 text-center">
+			<a
+				class="block font-refrigerator font-light text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline text-center"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+				Language
+			</a>
+			<ul
+				class="absolute left-1/2 top-full -translate-x-1/2 min-w-[180px] m-0 p-0 list-none bg-[#f9f9f9] dark:bg-neutral-800 shadow-[0_8px_16px_0_rgba(0,0,0,0.2)] z-10 leading-[0.7] opacity-0 invisible -translate-y-2.5 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:visible group-hover:-translate-x-1/2 group-hover:translate-y-0"
+				aria-label="Language submenu"
+			>
+				<li class="m-0"><a href="/japanese-conjugation-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Japanese Conjugation</a></li>
+				<li class="m-0"><a href="/japanese-vocabulary-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Japanese Vocabulary</a></li>
+				<li class="m-0"><a href="/japanese-kana-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Japanese Kana</a></li>
+				<li class="m-0"><a href="/chinese-vocabulary-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Chinese Vocabulary</a></li>
+			</ul>
+		</li>
+		<li class="relative group inline-block m-0 p-0 min-w-[8rem] text-center">
+			<a
+				class="block font-refrigerator font-light text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline text-center"
+				aria-haspopup="true"
+				aria-expanded="false"
+			>
+				Elsewhere
+			</a>
+			<ul
+				class="absolute left-1/2 top-full -translate-x-1/2 min-w-[180px] m-0 p-0 list-none bg-[#f9f9f9] dark:bg-neutral-800 shadow-[0_8px_16px_0_rgba(0,0,0,0.2)] z-10 leading-[0.7] opacity-0 invisible -translate-y-2.5 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:visible group-hover:-translate-x-1/2 group-hover:translate-y-0"
+				aria-label="Elsewhere submenu"
+			>
+				<li class="m-0"><a href="https://open.spotify.com/user/0f8iwn8344o15iyex20no2u7y?si=4a56f7a4cd194efc" target="_blank" rel="noopener noreferrer" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Spotify</a></li>
+				<li class="m-0"><a href="https://www.roblox.com/users/126989919/profile" target="_blank" rel="noopener noreferrer" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Roblox</a></li>
+				<li class="m-0"><a href="https://enka.network/u/620288461/" target="_blank" rel="noopener noreferrer" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Enka</a></li>
+			</ul>
+		</li>
+	</ul>
+	<div class="flex items-center gap-3 shrink-0 pl-6">
+		<div class="relative discord-copy-wrap">
+		<button
+			type="button"
+			class="discord-copy-btn group p-2 rounded-full border-0 cursor-pointer bg-transparent"
+			aria-label="Copy Discord"
+			data-copy="your_username"
+		>
+			<img src={typeof discordIcon === 'string' ? discordIcon : discordIcon.src} alt="" class="w-8 h-8 block dark:invert transition-opacity duration-200 group-hover:opacity-60" />
+		</button>
+		<span class="popover absolute block top-full left-1/2 -translate-x-1/2 mt-1.5 py-2.5 px-5 rounded-[10px] bg-black text-[whitesmoke] font-mono z-[5] opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out whitespace-nowrap" aria-live="polite">Copied!</span>
+	</div>
+	<button
+		type="button"
+		class="dark-mode-toggle group p-2 rounded-full border-0 cursor-pointer bg-transparent"
+		aria-label="Toggle dark mode"
+	>
+		<img src={typeof sunIcon === 'string' ? sunIcon : sunIcon.src} alt="" class="sun-icon w-8 h-8 block dark:hidden transition-opacity duration-200 group-hover:opacity-60" aria-hidden="true" />
+		<img src={typeof moonIcon === 'string' ? moonIcon : moonIcon.src} alt="" class="moon-icon w-8 h-8 hidden dark:block dark:invert transition-opacity duration-200 group-hover:opacity-60" aria-hidden="true" />
+	</button>
+	</div>
+</nav>
+
+<script>
+	const burger = document.getElementById('nav-burger');
+	const overlay = document.getElementById('mobile-nav-overlay');
+	if (burger && overlay) {
+		burger.addEventListener('click', () => {
+			const isOpen = burger.classList.toggle('open');
+			burger.setAttribute('aria-expanded', String(isOpen));
+			overlay.classList.toggle('open', isOpen);
+			overlay.setAttribute('aria-hidden', String(!isOpen));
+			if (!isOpen) {
+				overlay.querySelectorAll('.mobile-dropdown.open').forEach((el) => el.classList.remove('open'));
+				overlay.querySelectorAll('.mobile-nav-trigger[aria-expanded="true"]').forEach((btn) => btn.setAttribute('aria-expanded', 'false'));
+			}
+		});
+	}
+	document.querySelectorAll('.mobile-nav-trigger').forEach((trigger) => {
+		trigger.addEventListener('click', () => {
+			const id = trigger.getAttribute('data-mobile-dropdown');
+			const panel = id ? document.getElementById(id) : null;
+			if (!panel) return;
+			const isExpanded = panel.classList.toggle('open');
+			trigger.setAttribute('aria-expanded', String(isExpanded));
+		});
+	});
+
+	// Discord copy: copy data-copy to clipboard, show "Copied!" popover briefly
+	let discordPopoverTimeout: ReturnType<typeof setTimeout>;
+	let discordCopyCooldownUntil = 0;
+	const DISCORD_COPY_COOLDOWN_MS = 2500;
+	document.querySelectorAll('.discord-copy-btn').forEach((btn: Element) => {
+		btn.addEventListener('click', async () => {
+			if (Date.now() < discordCopyCooldownUntil) return;
+			const str = (btn as HTMLElement).getAttribute('data-copy') || '';
+			const wrap = btn.closest('.discord-copy-wrap');
+			const popover = wrap?.querySelector('.popover');
+			try {
+				await navigator.clipboard.writeText(str);
+				discordCopyCooldownUntil = Date.now() + DISCORD_COPY_COOLDOWN_MS;
+				if (popover) {
+					popover.classList.remove('opacity-0');
+					popover.classList.add('opacity-100');
+					clearTimeout(discordPopoverTimeout);
+					discordPopoverTimeout = setTimeout(() => {
+						popover.classList.add('opacity-0');
+						popover.classList.remove('opacity-100');
+					}, 1500);
+				}
+			} catch (_) {}
+		});
+	});
+
+	// Dark mode: toggle .dark on <html> and save to localStorage; 0.5s cooldown between toggles
+	let darkModeCooldownUntil = 0;
+	const DARK_MODE_COOLDOWN_MS = 500;
+	document.querySelectorAll('.dark-mode-toggle').forEach((btn: Element) => {
+		btn.addEventListener('click', () => {
+			if (Date.now() < darkModeCooldownUntil) return;
+			darkModeCooldownUntil = Date.now() + DARK_MODE_COOLDOWN_MS;
+			const isDark = document.documentElement.classList.toggle('dark');
+			localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+		});
+	});
+</script>

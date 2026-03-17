@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@font-face {
+  font-family: "Refrigerator Deluxe";
+  src: url("../assets/fonts/Refrigerator Deluxe Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Refrigerator Deluxe";
+  src: url("../assets/fonts/Refrigerator Deluxe.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@theme {
+  --font-refrigerator: "Refrigerator Deluxe", sans-serif;
+}
+
+/* Prevent selection and highlight of text and images site-wide */
+body {
+  -webkit-user-select: none;
+  user-select: none;
+}
+img {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  user-drag: none;
+  pointer-events: auto;
+}
+
+/* Fluid text: min 2xl, max 3xl; scales below md, fixed 3xl at md+ */
+.text-fluid-hero {
+  font-size: clamp(1.5rem, 1.53vw + 1.14rem, 1.875rem);
+}
+@media (min-width: 768px) {
+  .text-fluid-hero {
+    font-size: 1.875rem;
+  }
+}
+
+@keyframes logo-hover {
+  0%,
+  100% {
+    transform: scale(1.1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.1) rotate(4deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(-4deg);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Burger icon (nav-icon4 style) – smaller, X crosses at center */
+.nav-burger {
+  position: relative;
+  width: 32px;
+  height: 26px;
+  cursor: pointer;
+}
+.nav-burger span {
+  display: block;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #333;
+  transition:
+    transform 0.3s,
+    opacity 0.3s,
+    width 0.3s,
+    top 0.3s,
+    left 0.3s;
+}
+.nav-burger span:nth-child(1) {
+  top: 0;
+  transform-origin: center center;
+}
+.nav-burger span:nth-child(2) {
+  top: 12px;
+  transform-origin: center center;
+}
+.nav-burger span:nth-child(3) {
+  top: 24px;
+  transform-origin: center center;
+}
+/* X state: both lines centered at (16px, 13px), rotate 45° and -45° so they cross at center */
+.nav-burger.open span:nth-child(1) {
+  top: 12px;
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: center center;
+}
+.nav-burger.open span:nth-child(2) {
+  width: 0%;
+  opacity: 0;
+}
+.nav-burger.open span:nth-child(3) {
+  top: 12px;
+  left: 0;
+  transform: rotate(-45deg);
+  transform-origin: center center;
+}
+.dark .nav-burger span {
+  background: #e5e5e5;
+}
+
+/* Mobile nav overlay: visible when open */
+#mobile-nav-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Main nav options: start off-screen above, fade in when overlay opens */
+#mobile-nav-overlay .mobile-nav-main-item {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+#mobile-nav-overlay.open .mobile-nav-main-item {
+  animation: mobile-nav-fade-in 0.45s ease-out forwards;
+}
+#mobile-nav-overlay.open ul > li:nth-child(1) .mobile-nav-main-item { animation-delay: 0.05s; }
+#mobile-nav-overlay.open ul > li:nth-child(2) .mobile-nav-main-item { animation-delay: 0.1s; }
+#mobile-nav-overlay.open ul > li:nth-child(3) .mobile-nav-main-item { animation-delay: 0.15s; }
+#mobile-nav-overlay.open ul > li:nth-child(4) .mobile-nav-main-item { animation-delay: 0.2s; }
+#mobile-nav-overlay.open ul > li:nth-child(5) .mobile-nav-main-item { animation-delay: 0.25s; }
+
+@keyframes mobile-nav-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile overlay dropdown: collapsed by default, expand when .open */
+.mobile-dropdown.open {
+  max-height: 320px;
+  opacity: 1;
+}
+
+/* Home hero: page-load animations */
+@keyframes hero-fade-from-top {
+  from {
+    opacity: 0;
+    transform: translateY(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes hero-fade-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.home-hero-image {
+  opacity: 0;
+  animation: hero-fade-from-top 0.5s ease-out forwards;
+}
+
+/* Small screens: text fades in from top, short delay after image */
+.home-hero-text {
+  opacity: 0;
+  animation: hero-fade-from-top 0.5s ease-out 0.2s forwards;
+}
+@media (min-width: 768px) {
+  /* Wide screens: text fades in from left, 0.2s delay */
+  .home-hero-text {
+    animation: hero-fade-from-left 0.5s ease-out 0.2s forwards;
+  }
+}

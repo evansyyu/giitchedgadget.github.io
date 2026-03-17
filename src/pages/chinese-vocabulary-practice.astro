@@ -1,0 +1,172 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+---
+
+<Layout title="Chinese Vocabulary Practice">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" slot="head" />
+  <div class="min-h-screen flex flex-col">
+    <Navbar />
+    <main class="practice-page flex-1 flex flex-col items-center px-4 py-6 md:py-10 lg:py-12 xl:py-14 gap-8 lg:gap-10 xl:gap-12 font-['Roboto',sans-serif]">
+      <h1 class="text-2xl lg:text-3xl xl:text-4xl font-normal text-[#333] dark:text-neutral-200">Chinese Vocabulary Practice</h1>
+
+      <!-- Practice card -->
+      <div id="card" class="relative w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6 md:p-10 lg:p-12 xl:p-14 flex flex-col items-center gap-6 lg:gap-8 min-h-[420px] lg:min-h-[480px]">
+        <div class="flex flex-col items-center gap-2 lg:gap-4 mt-4 lg:mt-6">
+          <p id="cnword" class="text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] text-[#333] dark:text-neutral-100 leading-tight"></p>
+          <p id="definition" class="text-lg md:text-xl lg:text-2xl text-neutral-600 dark:text-neutral-400 text-center mt-2 lg:mt-4"></p>
+        </div>
+
+        <!-- Answer feedback -->
+        <div id="answerBox" class="hidden w-full max-w-md lg:max-w-lg rounded-xl py-4 px-5 lg:py-5 lg:px-6 text-center my-2 lg:my-4">
+          <p id="result" class="text-xl lg:text-2xl font-medium text-white"></p>
+          <p id="correctAnswer" class="text-lg lg:text-xl text-white/90 mt-2 lg:mt-3"></p>
+        </div>
+
+        <!-- Input -->
+        <div class="w-full max-w-md lg:max-w-lg flex flex-col items-center gap-3 lg:gap-4 mt-auto pt-4 lg:pt-6">
+          <input
+            type="text"
+            id="textbox"
+            autocomplete="off"
+            class="w-full text-center text-lg lg:text-xl py-2.5 lg:py-3 px-5 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-[#333] dark:text-neutral-100 outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 transition"
+          />
+          <p id="bottom" class="hidden text-sm lg:text-base text-neutral-500 dark:text-neutral-400">Press any key to continue</p>
+        </div>
+
+        <button
+          id="optionsBtn"
+          type="button"
+          class="mt-4 lg:mt-6 text-sm lg:text-base py-2 px-4 lg:py-2.5 lg:px-5 rounded-xl bg-neutral-200 dark:bg-neutral-700 text-[#333] dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition"
+        >Options</button>
+      </div>
+
+      <!-- Options panel -->
+      <div id="optionsPanel" class="hidden w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6 md:p-8 lg:p-10 xl:p-12">
+        <h2 class="text-xl lg:text-2xl font-normal text-center text-[#333] dark:text-neutral-200 mb-6 lg:mb-8">Options</h2>
+        <div class="flex flex-col items-center gap-4 lg:gap-6 text-sm lg:text-base text-[#333] dark:text-neutral-200">
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk1" checked class="accent-neutral-600 w-4 h-4" />HSK 1</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk2" class="accent-neutral-600 w-4 h-4" />HSK 2</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk3" class="accent-neutral-600 w-4 h-4" />HSK 3</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk4" class="accent-neutral-600 w-4 h-4" />HSK 4</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk5" class="accent-neutral-600 w-4 h-4" />HSK 5</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk6" class="accent-neutral-600 w-4 h-4" />HSK 6</label>
+        </div>
+        <div class="flex justify-center mt-6 lg:mt-8">
+          <button id="optionsBack" type="button" class="text-sm lg:text-base py-2 px-6 rounded-xl bg-neutral-200 dark:bg-neutral-700 text-[#333] dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition">Back</button>
+        </div>
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  import { hsk1 } from "../data/cvp/hsk1";
+  import { hsk2 } from "../data/cvp/hsk2";
+  import { hsk3 } from "../data/cvp/hsk3";
+  import { hsk4 } from "../data/cvp/hsk4";
+  import { hsk5 } from "../data/cvp/hsk5";
+  import { hsk6 } from "../data/cvp/hsk6";
+  import { SRSEngine } from "../lib/srs";
+
+  type CWord = { word: string; answer: string; eng: string };
+
+  const SETS: Record<string, CWord[]> = { hsk1, hsk2, hsk3, hsk4, hsk5, hsk6 };
+
+  const cnwordEl = document.getElementById("cnword")!;
+  const defEl = document.getElementById("definition")!;
+  const answerBox = document.getElementById("answerBox")!;
+  const resultEl = document.getElementById("result")!;
+  const correctEl = document.getElementById("correctAnswer")!;
+  const textbox = document.getElementById("textbox") as HTMLInputElement;
+  const bottomEl = document.getElementById("bottom")!;
+  const optionsBtn = document.getElementById("optionsBtn")!;
+  const optionsPanel = document.getElementById("optionsPanel")!;
+  const optionsBack = document.getElementById("optionsBack")!;
+
+  const srs = new SRSEngine<CWord>();
+
+  function getPool(): CWord[] {
+    const checks = document.querySelectorAll<HTMLInputElement>("[data-set]:checked");
+    const pool: CWord[] = [];
+    checks.forEach((c) => {
+      const s = SETS[c.dataset.set!];
+      if (s) pool.push(...s);
+    });
+    return pool;
+  }
+
+  function getAnswers(answer: string): string | string[] {
+    if (answer.includes(",")) return answer.split(",").map((s) => s.trim());
+    return answer;
+  }
+
+  let currentHandler: ((e: KeyboardEvent) => void) | null = null;
+
+  function nextCard() {
+    const pool = getPool();
+    if (pool.length === 0) return;
+    textbox.disabled = false;
+    textbox.value = "";
+    textbox.focus();
+    answerBox.classList.add("hidden");
+    bottomEl.classList.add("hidden");
+
+    const word = srs.pick(pool)!;
+    const answer = getAnswers(word.answer);
+
+    cnwordEl.textContent = word.word;
+    defEl.textContent = "Type the pinyin!";
+
+    if (currentHandler) document.removeEventListener("keyup", currentHandler);
+    currentHandler = (e: KeyboardEvent) => {
+      if (e.key !== "Enter") return;
+      const val = textbox.value;
+      textbox.value = "";
+      textbox.disabled = true;
+      answerBox.classList.remove("hidden");
+      bottomEl.classList.remove("hidden");
+      defEl.textContent = word.eng;
+
+      const isCorrect = Array.isArray(answer)
+        ? answer.includes(val)
+        : val === answer;
+
+      if (isCorrect) {
+        srs.correct(word);
+        answerBox.className = "w-full max-w-md rounded-xl py-3 px-5 text-center bg-emerald-500";
+        resultEl.textContent = "Correct";
+        correctEl.textContent = val + " ○";
+      } else {
+        srs.wrong(word);
+        answerBox.className = "w-full max-w-md rounded-xl py-3 px-5 text-center bg-red-500";
+        resultEl.textContent = (val || "No answer") + " ×";
+        correctEl.textContent = (Array.isArray(answer) ? answer.join(", ") : answer) + " ○";
+      }
+      document.removeEventListener("keyup", currentHandler!);
+      currentHandler = null;
+
+      const resetHandler = (ev: KeyboardEvent | MouseEvent) => {
+        document.removeEventListener("keyup", resetHandler);
+        document.removeEventListener("mouseup", resetHandler);
+        nextCard();
+      };
+      document.addEventListener("keyup", resetHandler);
+      document.addEventListener("mouseup", resetHandler);
+    };
+    document.addEventListener("keyup", currentHandler);
+  }
+
+  optionsBtn.addEventListener("click", () => {
+    optionsPanel.classList.toggle("hidden");
+    textbox.disabled = !optionsPanel.classList.contains("hidden");
+    if (optionsPanel.classList.contains("hidden")) textbox.focus();
+  });
+  optionsBack.addEventListener("click", () => {
+    optionsPanel.classList.add("hidden");
+    textbox.disabled = false;
+    textbox.focus();
+  });
+
+  nextCard();
+</script>

@@ -1,0 +1,111 @@
+---
+export interface GalleryItem {
+	type: 'sketchfab' | 'image' | 'video' | 'imageWithCaption';
+	src?: string;
+	embedUrl?: string;
+	title?: string;
+	alt?: string;
+	href?: string;
+	caption?: string;
+}
+
+interface Props {
+	items: GalleryItem[];
+	year: string;
+	/** Resolved URLs for assets from src/assets/work/{year}/ (filename -> url) */
+	assetUrls?: Record<string, string>;
+}
+
+const { items, year, assetUrls = {} } = Astro.props;
+const basePath = `/work/${year}`;
+
+function resolveSrc(filename: string): string {
+	if (filename.startsWith('http')) return filename;
+	const resolved = assetUrls[filename];
+	if (resolved) return resolved;
+	return `${basePath}/${encodeURIComponent(filename)}`;
+}
+---
+
+<div class="flex flex-col items-center w-full py-8 md:py-12 overflow-y-auto">
+	{items.map((item) => {
+		if (item.type === 'sketchfab' && item.embedUrl) {
+			return (
+				<div class="w-[80vw] max-w-[800px] my-6 md:my-8">
+					<div class="rounded-lg overflow-hidden shadow-lg aspect-video bg-neutral-200 dark:bg-neutral-800">
+						<iframe
+							title={item.title ?? '3D model'}
+							class="w-full aspect-video min-h-[300px]"
+							src={item.embedUrl}
+							allow="autoplay; fullscreen; xr-spatial-tracking"
+							allowfullscreen
+							loading="lazy"
+						/>
+					</div>
+				</div>
+			);
+		}
+		if (item.type === 'image' && item.src) {
+			const imgSrc = resolveSrc(item.src);
+			return (
+				<div class="w-[80vw] max-w-[800px] my-6 md:my-8">
+					<img
+						src={imgSrc}
+						alt={item.alt ?? ''}
+						class="w-full h-auto rounded-lg shadow-lg"
+						loading="lazy"
+					/>
+				</div>
+			);
+		}
+		if (item.type === 'imageWithCaption' && item.src) {
+			const imgSrc = resolveSrc(item.src);
+			return (
+				<div class="w-[80vw] max-w-[800px] my-6 md:my-8 flex flex-col items-center gap-3">
+					<img
+						src={imgSrc}
+						alt={item.alt ?? ''}
+						class="w-full h-auto rounded-lg shadow-lg"
+						loading="lazy"
+					/>
+					{item.href && (
+						<a
+							href={item.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="font-refrigerator text-lg md:text-xl text-center text-neutral-600 dark:text-neutral-400 hover:underline"
+						>
+							{item.caption ?? 'View'}
+						</a>
+					)}
+				</div>
+			);
+		}
+		if (item.type === 'video' && item.src) {
+			return (
+				<div class="w-[80vw] max-w-[500px] my-6 md:my-8 flex flex-col items-center gap-3">
+					<video
+						class="w-full h-auto rounded-lg shadow-lg"
+						autoplay
+						loop
+						muted
+						playsinline
+					>
+						<source src={resolveSrc(item.src!)} type="video/mp4" />
+					</video>
+					{item.href && (
+						<a
+							href={item.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="font-refrigerator text-lg md:text-xl text-center text-neutral-600 dark:text-neutral-400 hover:underline"
+						>
+							{item.caption ?? 'Reference'}
+						</a>
+					)}
+				</div>
+			);
+		}
+		return null;
+	})}
+</div>
