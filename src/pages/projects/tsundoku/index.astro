@@ -1,0 +1,32 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import TsundokuNavbar from '../../../components/tsundoku/TsundokuNavbar.astro';
+import TsundokuHero from '../../../components/tsundoku/TsundokuHero.astro';
+import TsundokuContent from '../../../components/tsundoku/TsundokuContent.astro';
+import tsundokuIcon from '../../../assets/icons/tsundokuicon.png';
+import tsundokuIconDark from '../../../assets/icons/tsundokuicon-dark.png';
+---
+
+<Layout
+	title="tsundoku reader"
+	iconLightHref={tsundokuIcon.src}
+	iconLightType="image/png"
+	iconDarkHref={tsundokuIconDark.src}
+	iconDarkType="image/png"
+	appleTouchIconHref={tsundokuIcon.src}
+>
+	<div class="fixed top-0 left-0 w-full z-50">
+		<TsundokuNavbar />
+	</div>
+	<div class="relative overscroll-none">
+		<TsundokuHero />
+		<div class="h-screen" aria-hidden="true"></div>
+		<TsundokuContent />
+	</div>
+</Layout>
+
+<style is:global>
+	html, body {
+		overscroll-behavior: none;
+	}
+</style>

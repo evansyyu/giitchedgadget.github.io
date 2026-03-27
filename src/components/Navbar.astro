@@ -4,8 +4,8 @@ import moonIcon from '../assets/icons/moon.svg';
 import discordIcon from '../assets/icons/discord.svg';
 ---
 
-<!-- Mobile: burger top left, logo top center (same y padding). Fixed so content never overlaps. -->
-<header class="fixed top-0 left-0 right-0 z-50 w-full py-6 flex items-center justify-between px-6 sm:hidden bg-white dark:bg-neutral-900" aria-label="Mobile header">
+<!-- Mobile: burger top left, logo top center (same y padding). -->
+<header class="z-50 w-full py-6 flex items-center justify-between px-6 sm:hidden bg-white dark:bg-neutral-900" aria-label="Mobile header">
 	<button
 		id="nav-burger"
 		type="button"
@@ -61,9 +61,9 @@ import discordIcon from '../assets/icons/discord.svg';
 			<li class="flex flex-col gap-2 items-center">
 				<button type="button" class="mobile-nav-main-item mobile-nav-trigger font-refrigerator font-light text-[#333] dark:text-neutral-200 text-4xl py-2 text-center bg-transparent border-0 cursor-pointer hover:underline" aria-expanded="false" aria-controls="mobile-dropdown-projects" data-mobile-dropdown="mobile-dropdown-projects">Projects</button>
 				<ul id="mobile-dropdown-projects" class="mobile-dropdown list-none m-0 space-y-1 overflow-hidden max-h-0 opacity-0 transition-all duration-300 flex flex-col items-center" aria-label="Projects submenu">
-					<li><a href="" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">tsundoku reader</a></li>
-					<li><a href="" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">komorebi</a></li>
-					<li><a href="" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">KanjiCrypt</a></li>
+					<li><a href="/projects/tsundoku" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">tsundoku reader</a></li>
+					<li><a href="/projects/komorebi" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">komorebi</a></li>
+					<li><a href="https://kanjicrypt.pages.dev" target="_blank" rel="noopener noreferrer" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">KanjiCrypt</a></li>
 				</ul>
 			</li>
 			<li class="flex flex-col gap-2 items-center">
@@ -73,16 +73,16 @@ import discordIcon from '../assets/icons/discord.svg';
 					<li><a href="/work/2022" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">2022</a></li>
 					<li><a href="/work/2021" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">2021</a></li>
 					<li><a href="/work/2020" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">2020</a></li>
-					<li><a href="/cv" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">CV</a></li>
+					<li><a href="/work/cv" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">CV</a></li>
 				</ul>
 			</li>
 			<li class="flex flex-col gap-2 items-center">
 				<button type="button" class="mobile-nav-main-item mobile-nav-trigger font-refrigerator font-light text-[#333] dark:text-neutral-200 text-4xl py-2 text-center bg-transparent border-0 cursor-pointer hover:underline" aria-expanded="false" aria-controls="mobile-dropdown-language" data-mobile-dropdown="mobile-dropdown-language">Language</button>
 				<ul id="mobile-dropdown-language" class="mobile-dropdown list-none m-0 space-y-1 overflow-hidden max-h-0 opacity-0 transition-all duration-300 flex flex-col items-center" aria-label="Language submenu">
-					<li><a href="/japanese-conjugation-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Japanese Conjugation</a></li>
-					<li><a href="/japanese-vocabulary-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Japanese Vocabulary</a></li>
-					<li><a href="/japanese-kana-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Japanese Kana</a></li>
-					<li><a href="/chinese-vocabulary-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Chinese Vocabulary</a></li>
+					<li><a href="/language/japanese-conjugation-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Japanese Conjugation</a></li>
+					<li><a href="/language/japanese-vocabulary-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Japanese Vocabulary</a></li>
+					<li><a href="/language/japanese-kana-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Japanese Kana</a></li>
+					<li><a href="/language/chinese-vocabulary-practice" class="block py-2 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-2xl text-center">Chinese Vocabulary</a></li>
 				</ul>
 			</li>
 			<li class="flex flex-col gap-2 items-center">
@@ -127,9 +127,9 @@ import discordIcon from '../assets/icons/discord.svg';
 				class="absolute left-1/2 top-full -translate-x-1/2 min-w-[180px] m-0 p-0 list-none bg-[#f9f9f9] dark:bg-neutral-800 shadow-[0_8px_16px_0_rgba(0,0,0,0.2)] z-10 leading-[0.7] opacity-0 invisible -translate-y-2.5 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:visible group-hover:-translate-x-1/2 group-hover:translate-y-0"
 				aria-label="Projects submenu"
 			>
-				<li class="m-0"><a href="" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">tsundoku reader</a></li>
-				<li class="m-0"><a href="" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">komorebi</a></li>
-				<li class="m-0"><a href="" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">KanjiCrypt</a></li>
+				<li class="m-0"><a href="/projects/tsundoku" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">tsundoku reader</a></li>
+				<li class="m-0"><a href="/projects/komorebi" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">komorebi</a></li>
+				<li class="m-0"><a href="https://kanjicrypt.pages.dev" target="_blank" rel="noopener noreferrer" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">KanjiCrypt</a></li>
 			</ul>
 		</li>
 		<li class="relative group inline-block m-0 p-0 min-w-32 text-center">
@@ -148,7 +148,7 @@ import discordIcon from '../assets/icons/discord.svg';
 				<li class="m-0"><a href="/work/2022" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">2022</a></li>
 				<li class="m-0"><a href="/work/2021" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">2021</a></li>
 				<li class="m-0"><a href="/work/2020" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">2020</a></li>
-				<li class="m-0"><a href="/cv" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">CV</a></li>
+				<li class="m-0"><a href="/work/cv" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">CV</a></li>
 			</ul>
 		</li>
 		<li class="relative group inline-block m-0 p-0 min-w-32 text-center">
@@ -163,10 +163,10 @@ import discordIcon from '../assets/icons/discord.svg';
 				class="absolute left-1/2 top-full -translate-x-1/2 min-w-[180px] m-0 p-0 list-none bg-[#f9f9f9] dark:bg-neutral-800 shadow-[0_8px_16px_0_rgba(0,0,0,0.2)] z-10 leading-[0.7] opacity-0 invisible -translate-y-2.5 transition-all duration-300 ease-out group-hover:opacity-100 group-hover:visible group-hover:-translate-x-1/2 group-hover:translate-y-0"
 				aria-label="Language submenu"
 			>
-				<li class="m-0"><a href="/japanese-conjugation-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Japanese Conjugation</a></li>
-				<li class="m-0"><a href="/japanese-vocabulary-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Japanese Vocabulary</a></li>
-				<li class="m-0"><a href="/japanese-kana-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Japanese Kana</a></li>
-				<li class="m-0"><a href="/chinese-vocabulary-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Chinese Vocabulary</a></li>
+				<li class="m-0"><a href="/language/japanese-conjugation-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Japanese Conjugation</a></li>
+				<li class="m-0"><a href="/language/japanese-vocabulary-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Japanese Vocabulary</a></li>
+				<li class="m-0"><a href="/language/japanese-kana-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Japanese Kana</a></li>
+				<li class="m-0"><a href="/language/chinese-vocabulary-practice" class="block py-3 px-4 text-black dark:text-neutral-200 hover:text-gray-400 dark:hover:text-neutral-400 no-underline hover:underline text-center text-xl">Chinese Vocabulary</a></li>
 			</ul>
 		</li>
 		<li class="relative group inline-block m-0 p-0 min-w-32 text-center">

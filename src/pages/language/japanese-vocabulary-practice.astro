@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
 ---
 
 <Layout title="Japanese Vocabulary Practice">
@@ -70,19 +70,19 @@ import Navbar from '../components/Navbar.astro';
 </Layout>
 
 <script>
-  import { n1 } from "../data/jvp/n1";
-  import { n2 } from "../data/jvp/n2";
-  import { n3 } from "../data/jvp/n3";
-  import { n4 } from "../data/jvp/n4";
-  import { n5 } from "../data/jvp/n5";
-  import { common } from "../data/jvp/common";
-  import { animals } from "../data/jvp/animals";
-  import { plants } from "../data/jvp/plants";
-  import { vegetables } from "../data/jvp/vegetables";
-  import { countries } from "../data/jvp/countries";
-  import { prefectures } from "../data/jvp/prefectures";
-  import { SRSEngine } from "../lib/srs";
-  import { convertToHiragana, kataToHira } from "../lib/romaji";
+  import { n1 } from "../../data/jvp/n1";
+  import { n2 } from "../../data/jvp/n2";
+  import { n3 } from "../../data/jvp/n3";
+  import { n4 } from "../../data/jvp/n4";
+  import { n5 } from "../../data/jvp/n5";
+  import { common } from "../../data/jvp/common";
+  import { animals } from "../../data/jvp/animals";
+  import { plants } from "../../data/jvp/plants";
+  import { vegetables } from "../../data/jvp/vegetables";
+  import { countries } from "../../data/jvp/countries";
+  import { prefectures } from "../../data/jvp/prefectures";
+  import { SRSEngine } from "../../lib/srs";
+  import { convertToHiragana, kataToHira } from "../../lib/romaji";
 
   type JWord = { kanji: string; kana: string; eng: string };
 

@@ -2,16 +2,30 @@
 import '../styles/global.css';
 interface Props {
 	title?: string;
+	iconLightHref?: string;
+	iconLightType?: string;
+	iconDarkHref?: string;
+	iconDarkType?: string;
+	appleTouchIconHref?: string;
 }
-const { title = 'Astro' } = Astro.props;
+const {
+	title = 'Astro',
+	iconLightHref = '/logo.svg',
+	iconLightType = 'image/svg+xml',
+	iconDarkHref = '/logo-inverted.svg',
+	iconDarkType = 'image/svg+xml',
+	appleTouchIconHref = '/logo.svg',
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/logo.svg" />
-		<link rel="apple-touch-icon" href="/logo.png" />
+		<link rel="icon" type={iconLightType} href={iconLightHref} media="(prefers-color-scheme: light)" />
+		<link rel="icon" type={iconDarkType} href={iconDarkHref} media="(prefers-color-scheme: dark)" />
+		<link rel="icon" type={iconLightType} href={iconLightHref} />
+		<link rel="apple-touch-icon" href={appleTouchIconHref} />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>

@@ -1,6 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
 ---
 
 <Layout title="Japanese Conjugation Practice">
@@ -113,7 +113,7 @@ import Navbar from '../components/Navbar.astro';
 </Layout>
 
 <script>
-  import { words } from "../data/jcp/words";
+  import { words } from "../../data/jcp/words";
   import {
     conjugate,
     generateVerbConjugation,
@@ -124,8 +124,8 @@ import Navbar from '../components/Navbar.astro';
     type Word,
     type ConjugationRequest,
     type QuizConfig,
-  } from "../lib/conjugation";
-  import { convertToHiragana } from "../lib/romaji";
+  } from "../../lib/conjugation";
+  import { convertToHiragana } from "../../lib/romaji";
 
   const wordEl = document.getElementById("word")!;
   const defEl = document.getElementById("definition")!;

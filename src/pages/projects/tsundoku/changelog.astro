@@ -1,0 +1,42 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import TsundokuNavbar from '../../../components/tsundoku/TsundokuNavbar.astro';
+import tsundokuIcon from '../../../assets/icons/tsundokuicon.png';
+import tsundokuIconDark from '../../../assets/icons/tsundokuicon-dark.png';
+---
+
+<Layout
+	title="changelog"
+	iconLightHref={tsundokuIcon.src}
+	iconDarkHref={tsundokuIconDark.src}
+	iconLightType="image/png"
+	iconDarkType="image/png"
+	appleTouchIconHref={tsundokuIcon.src}
+>
+	<div class="w-full z-50">
+		<TsundokuNavbar />
+	</div>
+	<div class="mt-12 px-[clamp(1rem,16vw,12rem)] pb-20 font-['Georgia_Pro',Georgia,serif] text-[#222] dark:text-neutral-100">
+		<div class="max-w-4xl mx-auto">
+			<h1 class="text-4xl sm:text-5xl mb-8 text-center">Changelog</h1>
+			<p class="text-center text-sm sm:text-base text-neutral-600 dark:text-neutral-400 mb-8">
+				Last updated: March 2026
+			</p>
+			<div class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 text-left">
+				<div class="flex items-baseline justify-between gap-4 mb-3">
+					<h2 class="text-2xl sm:text-3xl">1.0.0</h2>
+					<p class="text-sm sm:text-base text-neutral-600 dark:text-neutral-400 whitespace-nowrap">March 2026</p>
+				</div>
+				<ul class="list-disc pl-6 text-base sm:text-lg space-y-1">
+					<li>first release :D</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style is:global>
+	html, body {
+		overscroll-behavior: none;
+	}
+</style>

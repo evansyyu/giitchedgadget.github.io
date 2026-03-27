@@ -122,24 +122,32 @@ img {
 }
 
 /* Mobile nav overlay: visible when open */
-#mobile-nav-overlay.open {
+#mobile-nav-overlay.open,
+#tsundoku-mobile-nav-overlay.open {
   opacity: 1;
   pointer-events: auto;
 }
 
 /* Main nav options: start off-screen above, fade in when overlay opens */
-#mobile-nav-overlay .mobile-nav-main-item {
+#mobile-nav-overlay .mobile-nav-main-item,
+#tsundoku-mobile-nav-overlay .mobile-nav-main-item {
   opacity: 0;
   transform: translateY(-20px);
 }
-#mobile-nav-overlay.open .mobile-nav-main-item {
+#mobile-nav-overlay.open .mobile-nav-main-item,
+#tsundoku-mobile-nav-overlay.open .mobile-nav-main-item {
   animation: mobile-nav-fade-in 0.45s ease-out forwards;
 }
-#mobile-nav-overlay.open ul > li:nth-child(1) .mobile-nav-main-item { animation-delay: 0.05s; }
-#mobile-nav-overlay.open ul > li:nth-child(2) .mobile-nav-main-item { animation-delay: 0.1s; }
-#mobile-nav-overlay.open ul > li:nth-child(3) .mobile-nav-main-item { animation-delay: 0.15s; }
-#mobile-nav-overlay.open ul > li:nth-child(4) .mobile-nav-main-item { animation-delay: 0.2s; }
-#mobile-nav-overlay.open ul > li:nth-child(5) .mobile-nav-main-item { animation-delay: 0.25s; }
+#mobile-nav-overlay.open ul > li:nth-child(1) .mobile-nav-main-item,
+#tsundoku-mobile-nav-overlay.open ul > li:nth-child(1) .mobile-nav-main-item { animation-delay: 0.05s; }
+#mobile-nav-overlay.open ul > li:nth-child(2) .mobile-nav-main-item,
+#tsundoku-mobile-nav-overlay.open ul > li:nth-child(2) .mobile-nav-main-item { animation-delay: 0.1s; }
+#mobile-nav-overlay.open ul > li:nth-child(3) .mobile-nav-main-item,
+#tsundoku-mobile-nav-overlay.open ul > li:nth-child(3) .mobile-nav-main-item { animation-delay: 0.15s; }
+#mobile-nav-overlay.open ul > li:nth-child(4) .mobile-nav-main-item,
+#tsundoku-mobile-nav-overlay.open ul > li:nth-child(4) .mobile-nav-main-item { animation-delay: 0.2s; }
+#mobile-nav-overlay.open ul > li:nth-child(5) .mobile-nav-main-item,
+#tsundoku-mobile-nav-overlay.open ul > li:nth-child(5) .mobile-nav-main-item { animation-delay: 0.25s; }
 
 @keyframes mobile-nav-fade-in {
   from {

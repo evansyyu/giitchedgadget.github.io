@@ -1,0 +1,56 @@
+---
+import HeroBackground from '../../assets/images/HeroBackground.png';
+import PhoneRender from '../../assets/images/booksscreenrendertransparent.png';
+---
+
+<!-- Fullscreen sticky hero -->
+<div id="tsundoku-hero" class="fixed top-0 left-0 w-full h-[100svh] z-0 overflow-hidden font-['Georgia_Pro',Georgia,serif]">
+	<img
+		src={HeroBackground.src}
+		alt=""
+		class="absolute inset-0 w-full h-full object-cover blur-[3px] opacity-25"
+	/>
+
+	<div class="absolute inset-0 hidden xl:flex justify-center lg:justify-end lg:pr-36">
+		<img
+			src={PhoneRender.src}
+			alt="Phone render"
+			class="h-[130%] mt-12 object-contain opacity-90 contrast-150"
+		/>
+	</div>
+
+	<!-- Dark overlay -->
+	<div id="tsundoku-hero-overlay" class="absolute inset-0"></div>
+
+	<div class="absolute inset-0 flex items-center justify-center lg:justify-start pointer-events-none">
+		<div id="tsundoku-hero-text" class="text-neutral-800 dark:text-gray-300 mt-24 w-full flex flex-col gap-4 items-center lg:items-start px-6 lg:px-12 pointer-events-auto">
+			<h1 class="text-5xl lg:text-7xl font-bold mt-24 text-center lg:text-left">
+				tsundoku reader
+			</h1>
+			<p class="text-2xl lg:text-3xl text-center lg:text-left">
+				Easy, convenient reading, in your pocket.
+			</p>
+		<p class="text-3xl lg:text-4xl font-bold text-center lg:text-left font-['Roboto',sans-serif]">
+			Free.
+		</p>
+		<p class="text-3xl lg:text-4xl font-bold text-center lg:text-left font-['Roboto',sans-serif]">
+			Forever.
+		</p>
+		</div>
+	</div>
+
+	<div class="absolute bottom-8 inset-x-0 flex flex-col items-center text-neutral-800 dark:text-gray-300 text-center font-['Roboto',sans-serif] xl:inset-x-auto xl:left-54 xl:items-start xl:text-left">
+		<p class="text-2xl mb-2 font-['Georgia_Pro',Georgia,serif]">scroll down</p>
+		<div class="animate-bounce self-center">↓</div>
+	</div>
+</div>
+
+<style is:global>
+	#tsundoku-hero-overlay {
+		pointer-events: none;
+	}
+
+	#tsundoku-hero-text {
+		transition: opacity 0.2s ease-out;
+	}
+</style>

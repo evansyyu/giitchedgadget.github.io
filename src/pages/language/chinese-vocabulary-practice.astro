@@ -1,19 +1,19 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/Navbar.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
 ---
 
-<Layout title="Japanese Kana Practice">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" slot="head" />
+<Layout title="Chinese Vocabulary Practice">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" slot="head" />
   <div class="min-h-screen flex flex-col">
     <Navbar />
     <main class="practice-page flex-1 flex flex-col items-center px-4 py-6 md:py-10 lg:py-12 xl:py-14 gap-8 lg:gap-10 xl:gap-12 font-['Roboto',sans-serif]">
-      <h1 class="text-2xl lg:text-3xl xl:text-4xl font-normal text-[#333] dark:text-neutral-200">Japanese Kana Practice</h1>
+      <h1 class="text-2xl lg:text-3xl xl:text-4xl font-normal text-[#333] dark:text-neutral-200">Chinese Vocabulary Practice</h1>
 
       <!-- Practice card -->
       <div id="card" class="relative w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6 md:p-10 lg:p-12 xl:p-14 flex flex-col items-center gap-6 lg:gap-8 min-h-[420px] lg:min-h-[480px]">
         <div class="flex flex-col items-center gap-2 lg:gap-4 mt-4 lg:mt-6">
-          <p id="word" class="text-7xl md:text-9xl lg:text-[10rem] xl:text-[12rem] text-[#333] dark:text-neutral-100 font-['Noto_Serif_JP',serif]"></p>
+          <p id="cnword" class="text-6xl md:text-8xl lg:text-9xl xl:text-[10rem] text-[#333] dark:text-neutral-100 leading-tight"></p>
           <p id="definition" class="text-lg md:text-xl lg:text-2xl text-neutral-600 dark:text-neutral-400 text-center mt-2 lg:mt-4"></p>
         </div>
 
@@ -44,35 +44,13 @@ import Navbar from '../components/Navbar.astro';
       <!-- Options panel -->
       <div id="optionsPanel" class="hidden w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6 md:p-8 lg:p-10 xl:p-12">
         <h2 class="text-xl lg:text-2xl font-normal text-center text-[#333] dark:text-neutral-200 mb-6 lg:mb-8">Options</h2>
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 lg:gap-8 text-sm lg:text-base text-[#333] dark:text-neutral-200">
-          <!-- Display mode -->
-          <div>
-            <p class="font-medium mb-2 text-base lg:text-lg">Display</p>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" id="showHiragana" checked class="accent-neutral-600 w-4 h-4" />Hiragana</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" id="showKatakana" checked class="accent-neutral-600 w-4 h-4" />Katakana</label>
-            <hr class="my-3 border-neutral-300 dark:border-neutral-600" />
-            <p class="font-medium mb-2 text-base lg:text-lg">Filters</p>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" id="showDakuten" checked class="accent-neutral-600 w-4 h-4" />Dakuten</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" id="showHandakuten" checked class="accent-neutral-600 w-4 h-4" />Handakuten</label>
-          </div>
-          <!-- Kana rows -->
-          <div>
-            <p class="font-medium mb-2 text-base lg:text-lg">Rows</p>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="あ" checked class="accent-neutral-600 w-4 h-4" />あ row</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="か" checked class="accent-neutral-600 w-4 h-4" />か row</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="さ" checked class="accent-neutral-600 w-4 h-4" />さ row</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="た" checked class="accent-neutral-600 w-4 h-4" />た row</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="な" checked class="accent-neutral-600 w-4 h-4" />な row</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="は" checked class="accent-neutral-600 w-4 h-4" />は row</label>
-          </div>
-          <div>
-            <p class="font-medium mb-2 text-base">&nbsp;</p>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="ま" checked class="accent-neutral-600 w-4 h-4" />ま row</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="ら" checked class="accent-neutral-600 w-4 h-4" />ら row</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="や" checked class="accent-neutral-600 w-4 h-4" />や row</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="ん" checked class="accent-neutral-600 w-4 h-4" />ん row</label>
-            <label class="flex items-center gap-2 mb-1.5"><input type="checkbox" data-row="ゐ" checked class="accent-neutral-600 w-4 h-4" />ゐ row</label>
-          </div>
+        <div class="flex flex-col items-center gap-4 lg:gap-6 text-sm lg:text-base text-[#333] dark:text-neutral-200">
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk1" checked class="accent-neutral-600 w-4 h-4" />HSK 1</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk2" class="accent-neutral-600 w-4 h-4" />HSK 2</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk3" class="accent-neutral-600 w-4 h-4" />HSK 3</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk4" class="accent-neutral-600 w-4 h-4" />HSK 4</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk5" class="accent-neutral-600 w-4 h-4" />HSK 5</label>
+          <label class="flex items-center gap-2"><input type="checkbox" data-set="hsk6" class="accent-neutral-600 w-4 h-4" />HSK 6</label>
         </div>
         <div class="flex justify-center mt-6 lg:mt-8">
           <button id="optionsBack" type="button" class="text-sm lg:text-base py-2 px-6 rounded-xl bg-neutral-200 dark:bg-neutral-700 text-[#333] dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition">Back</button>
@@ -83,14 +61,19 @@ import Navbar from '../components/Navbar.astro';
 </Layout>
 
 <script>
-  import { あ, か, さ, た, な, は, ま, ら, や, ん, ゐ } from "../data/kana/kanaList";
-  import { SRSEngine } from "../lib/srs";
+  import { hsk1 } from "../../data/cvp/hsk1";
+  import { hsk2 } from "../../data/cvp/hsk2";
+  import { hsk3 } from "../../data/cvp/hsk3";
+  import { hsk4 } from "../../data/cvp/hsk4";
+  import { hsk5 } from "../../data/cvp/hsk5";
+  import { hsk6 } from "../../data/cvp/hsk6";
+  import { SRSEngine } from "../../lib/srs";
 
-  type Kana = { hiragana: string; katakana: string; eng: string; dakuten: boolean; handakuten: boolean };
+  type CWord = { word: string; answer: string; eng: string };
 
-  const ROWS: Record<string, Kana[]> = { あ, か, さ, た, な, は, ま, ら, や, ん, ゐ };
+  const SETS: Record<string, CWord[]> = { hsk1, hsk2, hsk3, hsk4, hsk5, hsk6 };
 
-  const wordEl = document.getElementById("word")!;
+  const cnwordEl = document.getElementById("cnword")!;
   const defEl = document.getElementById("definition")!;
   const answerBox = document.getElementById("answerBox")!;
   const resultEl = document.getElementById("result")!;
@@ -100,36 +83,22 @@ import Navbar from '../components/Navbar.astro';
   const optionsBtn = document.getElementById("optionsBtn")!;
   const optionsPanel = document.getElementById("optionsPanel")!;
   const optionsBack = document.getElementById("optionsBack")!;
-  const showHiragana = document.getElementById("showHiragana") as HTMLInputElement;
-  const showKatakana = document.getElementById("showKatakana") as HTMLInputElement;
-  const showDakuten = document.getElementById("showDakuten") as HTMLInputElement;
-  const showHandakuten = document.getElementById("showHandakuten") as HTMLInputElement;
 
-  const srs = new SRSEngine<Kana>();
+  const srs = new SRSEngine<CWord>();
 
-  function getPool(): Kana[] {
-    const checks = document.querySelectorAll<HTMLInputElement>("[data-row]:checked");
-    let pool: Kana[] = [];
+  function getPool(): CWord[] {
+    const checks = document.querySelectorAll<HTMLInputElement>("[data-set]:checked");
+    const pool: CWord[] = [];
     checks.forEach((c) => {
-      const r = ROWS[c.dataset.row!];
-      if (r) pool.push(...r);
+      const s = SETS[c.dataset.set!];
+      if (s) pool.push(...s);
     });
-    if (!showDakuten.checked) pool = pool.filter((k) => !k.dakuten);
-    if (!showHandakuten.checked) pool = pool.filter((k) => !k.handakuten);
     return pool;
   }
 
-  function getDisplay(k: Kana): string {
-    const hira = showHiragana.checked;
-    const kata = showKatakana.checked;
-    if (hira && kata) return Math.random() < 0.33 ? k.katakana : k.hiragana;
-    if (kata) return k.katakana;
-    return k.hiragana;
-  }
-
-  function getAnswers(eng: string): string | string[] {
-    if (eng.includes(",")) return eng.split(",").map((s) => s.trim());
-    return eng;
+  function getAnswers(answer: string): string | string[] {
+    if (answer.includes(",")) return answer.split(",").map((s) => s.trim());
+    return answer;
   }
 
   let currentHandler: ((e: KeyboardEvent) => void) | null = null;
@@ -143,33 +112,33 @@ import Navbar from '../components/Navbar.astro';
     answerBox.classList.add("hidden");
     bottomEl.classList.add("hidden");
 
-    const kana = srs.pick(pool)!;
-    const answer = getAnswers(kana.eng);
+    const word = srs.pick(pool)!;
+    const answer = getAnswers(word.answer);
 
-    wordEl.textContent = getDisplay(kana);
-    defEl.textContent = "Type the reading!";
+    cnwordEl.textContent = word.word;
+    defEl.textContent = "Type the pinyin!";
 
     if (currentHandler) document.removeEventListener("keyup", currentHandler);
     currentHandler = (e: KeyboardEvent) => {
       if (e.key !== "Enter") return;
-      const val = textbox.value.toLowerCase();
+      const val = textbox.value;
       textbox.value = "";
       textbox.disabled = true;
       answerBox.classList.remove("hidden");
       bottomEl.classList.remove("hidden");
-      defEl.textContent = "";
+      defEl.textContent = word.eng;
 
       const isCorrect = Array.isArray(answer)
         ? answer.includes(val)
         : val === answer;
 
       if (isCorrect) {
-        srs.correct(kana);
+        srs.correct(word);
         answerBox.className = "w-full max-w-md rounded-xl py-3 px-5 text-center bg-emerald-500";
         resultEl.textContent = "Correct";
         correctEl.textContent = val + " ○";
       } else {
-        srs.wrong(kana);
+        srs.wrong(word);
         answerBox.className = "w-full max-w-md rounded-xl py-3 px-5 text-center bg-red-500";
         resultEl.textContent = (val || "No answer") + " ×";
         correctEl.textContent = (Array.isArray(answer) ? answer.join(", ") : answer) + " ○";

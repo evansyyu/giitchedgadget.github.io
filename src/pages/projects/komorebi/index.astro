@@ -1,0 +1,28 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Navbar from '../../../components/Navbar.astro';
+---
+
+<Layout
+	title="komorebi"
+	iconLightHref="/logo.svg"
+	iconLightType="image/svg+xml"
+	iconDarkHref="/logo-inverted.svg"
+	iconDarkType="image/svg+xml"
+	appleTouchIconHref="/logo.svg"
+>
+	<div class="w-full z-50">
+		<Navbar />
+	</div>
+	<div class="min-h-screen flex items-center justify-center text-center px-6 pb-20">
+		<p class="text-4xl sm:text-5xl text-[#333] dark:text-neutral-100 font-refrigerator font-light">
+			coming soon lol
+		</p>
+	</div>
+</Layout>
+
+<style is:global>
+	html, body {
+		overscroll-behavior: none;
+	}
+</style>
