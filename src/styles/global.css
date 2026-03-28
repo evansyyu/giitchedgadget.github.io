@@ -20,7 +20,7 @@
   --font-refrigerator: "Refrigerator Deluxe", sans-serif;
 }
 
-/* Prevent selection and highlight of text and images site-wide */
+/* prevent sitewide selection/highlight of text and images */
 body {
   -webkit-user-select: none;
   user-select: none;
@@ -33,7 +33,7 @@ img {
   pointer-events: auto;
 }
 
-/* Fluid text: min 2xl, max 3xl; scales below md, fixed 3xl at md+ */
+/* fluid text: min 2xl, max 3xl; scales below md, fixed 3xl at md+ */
 .text-fluid-hero {
   font-size: clamp(1.5rem, 1.53vw + 1.14rem, 1.875rem);
 }
@@ -67,7 +67,7 @@ img {
   }
 }
 
-/* Burger icon (nav-icon4 style) – smaller, X crosses at center */
+/* burger icon */
 .nav-burger {
   position: relative;
   width: 32px;
@@ -100,7 +100,7 @@ img {
   top: 24px;
   transform-origin: center center;
 }
-/* X state: both lines centered at (16px, 13px), rotate 45° and -45° so they cross at center */
+/* burger X */
 .nav-burger.open span:nth-child(1) {
   top: 12px;
   left: 0;
@@ -121,14 +121,14 @@ img {
   background: #e5e5e5;
 }
 
-/* Mobile nav overlay: visible when open */
+/* mobile nav overlay for open burger */
 #mobile-nav-overlay.open,
 #tsundoku-mobile-nav-overlay.open {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* Main nav options: start off-screen above, fade in when overlay opens */
+/* main nav options with fade from top animation */
 #mobile-nav-overlay .mobile-nav-main-item,
 #tsundoku-mobile-nav-overlay .mobile-nav-main-item {
   opacity: 0;
@@ -160,13 +160,13 @@ img {
   }
 }
 
-/* Mobile overlay dropdown: collapsed by default, expand when .open */
+/* mobile overlay dropdown, collapsed by default, expand when .open */
 .mobile-dropdown.open {
   max-height: 320px;
   opacity: 1;
 }
 
-/* Home hero: page-load animations */
+/* home hero page load animations */
 @keyframes hero-fade-from-top {
   from {
     opacity: 0;
@@ -193,13 +193,13 @@ img {
   animation: hero-fade-from-top 0.5s ease-out forwards;
 }
 
-/* Small screens: text fades in from top, short delay after image */
+/* small screens: text fades in from top, short delay after image */
 .home-hero-text {
   opacity: 0;
   animation: hero-fade-from-top 0.5s ease-out 0.2s forwards;
 }
 @media (min-width: 768px) {
-  /* Wide screens: text fades in from left, 0.2s delay */
+  /* wide screens: text fades in from left, 0.2s delay */
   .home-hero-text {
     animation: hero-fade-from-left 0.5s ease-out 0.2s forwards;
   }

@@ -1,9 +1,9 @@
 /**
- * Anki-inspired Leitner-box SRS engine (session-only, non-persistent).
+ * anki-inspired leitner-box SRS engine (session-only, non persistent)
  *
- * Cards move through boxes 0-3. Correct answers advance the box;
- * wrong answers reset to box 0. Cards at box 4+ are "graduated"
- * and leave the review queue. The scheduler picks the most overdue
+ * cards move through boxes 0-3, correct answers advance the box,
+ * wrong answers reset to box 0. cards at box 4+ are "graduated"
+ * and leave the review queue. the scheduler picks the most overdue
  * review card, falling back to a new unseen card when nothing is due.
  */
 
@@ -25,7 +25,7 @@ export class SRSEngine<T> {
     return this.questionNum;
   }
 
-  /** Pick the next card to show. Returns a review card if one is overdue, otherwise a new unseen item. */
+  // pick the next card to show. returns a review card if one is overdue, otherwise a new unseen item
   pick(pool: T[]): T | null {
     this.questionNum++;
 
@@ -55,7 +55,7 @@ export class SRSEngine<T> {
     return pick;
   }
 
-  /** Record a correct answer. Advances the box or graduates the card. */
+  // record a correct answer. advances the box or graduates the card
   correct(item: T): void {
     const idx = this.reviews.findIndex((r) => r.item === item);
     if (idx === -1) return;
@@ -68,7 +68,7 @@ export class SRSEngine<T> {
     }
   }
 
-  /** Record a wrong answer. Adds or resets the card to box 0. */
+  // record a wrong answer. adds or resets the card to box 0
   wrong(item: T): void {
     this.seen.add(item);
     const existing = this.reviews.find((r) => r.item === item);
@@ -80,7 +80,7 @@ export class SRSEngine<T> {
     }
   }
 
-  /** Reset all state. */
+  // resets all state
   reset(): void {
     this.reviews = [];
     this.seen.clear();

@@ -5,42 +5,42 @@ import Navbar from '../../components/Navbar.astro';
 
 <Layout title="Japanese Conjugation Practice">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet" slot="head" />
-  <div class="min-h-screen flex flex-col">
+  <div id="pageWrap" class="flex h-dvh flex-col overflow-hidden">
     <Navbar />
-    <main class="practice-page flex-1 flex flex-col items-center px-4 py-6 md:py-10 lg:py-12 xl:py-14 gap-8 lg:gap-10 xl:gap-12 font-['Roboto',sans-serif]">
+    <main class="practice-page flex min-h-0 flex-1 flex-col items-center overflow-hidden px-4 gap-8 lg:gap-10 xl:gap-12 font-['Roboto',sans-serif]">
       <h1 class="text-2xl lg:text-3xl xl:text-4xl font-normal text-[#333] dark:text-neutral-200">Japanese Conjugation Practice</h1>
 
       <!-- Practice card -->
-      <div id="card" class="relative w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-neutral-100 dark:bg-neutral-800 rounded-2xl p-6 md:p-10 lg:p-12 xl:p-14 flex flex-col items-center gap-6 lg:gap-8 min-h-[420px] lg:min-h-[480px]">
-        <div class="flex flex-col items-center gap-2 lg:gap-3 mt-4 lg:mt-6">
-          <ruby id="word" class="text-4xl md:text-6xl lg:text-7xl xl:text-8xl text-[#333] dark:text-neutral-100 font-['Noto_Serif_JP',serif]"></ruby>
-          <p id="definition" class="text-lg md:text-xl lg:text-2xl text-neutral-600 dark:text-neutral-400 text-center"></p>
+      <div id="card" class="relative w-full max-w-2xl lg:max-w-3xl xl:max-w-4xl bg-neutral-100 dark:bg-neutral-800 rounded-2xl px-6 md:px-10 lg:px-12 xl:px-14 py-2 md:py-4 flex flex-col items-center gap-4 lg:gap-6 min-h-[420px] lg:min-h-[480px]">
+        <div class="flex flex-col items-center gap-2 lg:gap-4 mt-4 lg:mt-6">
+          <ruby id="word" class="text-5xl md:text-6xl text-[#333] dark:text-neutral-100 font-['Noto_Serif_JP',serif]"></ruby>
+          <p id="definition" class="text-lg lg:text-xl text-neutral-600 dark:text-neutral-400 text-center"></p>
           <p id="type" class="text-sm lg:text-base text-neutral-500 dark:text-neutral-500 text-center"></p>
+          <p id="targetInflections" class="text-xl md:text-2xl text-neutral-700 dark:text-neutral-300 text-center tracking-wide"></p>
         </div>
-        <p id="targetInflections" class="text-base md:text-lg lg:text-xl text-neutral-700 dark:text-neutral-300 text-center tracking-wide mt-2 lg:mt-4"></p>
 
         <!-- Answer feedback -->
-        <div id="answerBox" class="hidden w-full max-w-md lg:max-w-lg rounded-xl py-4 px-5 lg:py-5 lg:px-6 text-center my-2 lg:my-4">
-          <p id="result" class="text-xl lg:text-2xl font-medium text-white"></p>
-          <p id="correctAnswer" class="text-lg lg:text-xl text-white/90 mt-2 lg:mt-3"></p>
+        <div id="answerBox" class="hidden w-full max-w-md lg:max-w-lg rounded-xl py-4 px-5 lg:py-5 lg:px-6 text-center lg:my-2">
+          <p id="result" class="text-xl lg:text-2xl font-bold text-white"></p>
+          <p id="correctAnswer" class="text-lg lg:text-xl text-white/90 mt-2 lg:mt-3 font-medium"></p>
         </div>
 
         <!-- Input -->
-        <div class="w-full max-w-md lg:max-w-lg flex flex-col items-center gap-3 lg:gap-4 mt-auto pt-4 lg:pt-6">
+        <div class="w-full max-w-md lg:max-w-lg flex flex-col items-center mt-auto">
           <input
             type="text"
             id="textbox"
             autocomplete="off"
-            class="w-full text-center text-lg lg:text-xl py-2.5 lg:py-3 px-5 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-[#333] dark:text-neutral-100 outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 transition"
+            class="w-full text-center text-lg lg:text-xl py-2 lg:py-3 px-5 rounded-full border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-700 text-[#333] dark:text-neutral-100 outline-none focus:ring-2 focus:ring-neutral-400 dark:focus:ring-neutral-500 transition"
           />
-          <p id="bottom" class="hidden text-sm lg:text-base text-neutral-500 dark:text-neutral-400">Press any key to continue</p>
+          <p id="bottom" class="hidden text-base lg:text-xl text-neutral-500 dark:text-neutral-400">Press any key to continue</p>
         </div>
 
         <!-- Options toggle: below input to avoid overlap on small screens -->
         <button
           id="optionsBtn"
           type="button"
-          class="mt-4 lg:mt-6 text-sm lg:text-base py-2 px-4 lg:py-2.5 lg:px-5 rounded-xl bg-neutral-200 dark:bg-neutral-700 text-[#333] dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition"
+          class="text-sm lg:text-base py-2 px-4 lg:py-2.5 lg:px-5 rounded-xl bg-neutral-200 dark:bg-neutral-700 text-[#333] dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-600 transition"
         >Options</button>
       </div>
 
@@ -112,6 +112,14 @@ import Navbar from '../../components/Navbar.astro';
   </div>
 </Layout>
 
+<style>
+  /* furigana style */
+  #word :global(rt) {
+    font-size: 0.4em;
+    line-height: 0;
+  }
+</style>
+
 <script>
   import { words } from "../../data/jcp/words";
   import {
@@ -140,6 +148,29 @@ import Navbar from '../../components/Navbar.astro';
   const optionsPanel = document.getElementById("optionsPanel")!;
   const optionsBack = document.getElementById("optionsBack")!;
   const furiganaCheck = document.getElementById("furiganaCheck") as HTMLInputElement;
+  const pageWrap = document.getElementById("pageWrap")!;
+  const practiceMain = document.querySelector("main.practice-page") as HTMLElement;
+
+  function setPracticeScrollLocked(locked: boolean) {
+    if (locked) {
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.overflow = "hidden";
+      pageWrap.style.removeProperty("height");
+      pageWrap.style.removeProperty("min-height");
+      pageWrap.style.removeProperty("overflow");
+      practiceMain.style.removeProperty("overflow");
+      window.scrollTo(0, 0);
+    } else {
+      document.documentElement.style.overflow = "";
+      document.body.style.overflow = "";
+      pageWrap.style.height = "auto";
+      pageWrap.style.minHeight = "100dvh";
+      pageWrap.style.overflow = "visible";
+      practiceMain.style.overflow = "visible";
+    }
+  }
+
+  setPracticeScrollLocked(true);
 
   const config: QuizConfig = defaultQuizConfig();
 
@@ -172,6 +203,7 @@ import Navbar from '../../components/Navbar.astro';
     textbox.focus();
     answerBox.classList.add("hidden");
     bottomEl.classList.add("hidden");
+    textbox.hidden = false;
     typeEl.textContent = "";
 
     const word = getRandomWord();
@@ -192,6 +224,8 @@ import Navbar from '../../components/Navbar.astro';
       const val = textbox.value;
       textbox.value = "";
       textbox.disabled = true;
+      textbox.blur();
+      textbox.hidden = true;
       answerBox.classList.remove("hidden");
       bottomEl.classList.remove("hidden");
       typeEl.textContent = describeType(word);
@@ -232,12 +266,15 @@ import Navbar from '../../components/Navbar.astro';
 
   optionsBtn.addEventListener("click", () => {
     optionsPanel.classList.toggle("hidden");
-    textbox.disabled = !optionsPanel.classList.contains("hidden");
-    if (optionsPanel.classList.contains("hidden")) textbox.focus();
+    const panelOpen = !optionsPanel.classList.contains("hidden");
+    textbox.disabled = panelOpen;
+    setPracticeScrollLocked(!panelOpen);
+    if (!panelOpen) textbox.focus();
   });
   optionsBack.addEventListener("click", () => {
     optionsPanel.classList.add("hidden");
     textbox.disabled = false;
+    setPracticeScrollLocked(true);
     textbox.focus();
   });
   furiganaCheck.addEventListener("change", manageFurigana);

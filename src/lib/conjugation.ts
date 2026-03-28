@@ -2,7 +2,7 @@
  * Japanese conjugation engine.
  */
 
-// ── Types ────────────────────────────────────────────────────────
+//types
 
 export interface Word {
   kanji: string;
@@ -19,7 +19,7 @@ export interface ConjugationRequest {
   formality?: "formal" | "casual" | null;
 }
 
-// ── Godan helpers ────────────────────────────────────────────────
+//godan helpers
 
 type Vowel = "a" | "i" | "e" | "o";
 
@@ -72,7 +72,7 @@ function godanStem(kana: string, vowel: Vowel): string {
   return chopLast(kana) + inflect(kana, vowel);
 }
 
-// ── Te-form / ta-form builders (godan) ──────────────────────────
+// godan te/ta form builders
 
 function godanTe(kana: string): string {
   const last = lastChar(kana);
@@ -89,7 +89,7 @@ function godanTa(kana: string): string {
   return base + TA_SUFFIX[group];
 }
 
-// ── Regular verb conjugation ─────────────────────────────────────
+//ichidan conjugation
 
 function conjugateRegular(w: Word, c: ConjugationRequest): string {
   const k = w.kana;
@@ -136,7 +136,7 @@ function conjugateRegular(w: Word, c: ConjugationRequest): string {
     return finishIchidan(dStem, c);
   }
 
-  // Plain verb (no special form)
+  // normal verb, no conjugation
   if (c.polarity === "negative") {
     const negStem = isRu ? ichidanStem(k) : chopLast(k) + inflect(k, "a");
     if (c.formality === "formal") {
@@ -145,12 +145,12 @@ function conjugateRegular(w: Word, c: ConjugationRequest): string {
     return negStem + (c.tense === "past" ? "なかった" : "ない");
   }
 
-  // Affirmative
+  // affirmative
   if (c.formality === "formal") {
     return stem + (c.tense === "past" ? "ました" : "ます");
   }
   if (c.tense === "present") return k;
-  // Past casual
+  // past casual
   return isRu ? ichidanStem(k) + "た" : godanTa(k);
 }
 
@@ -164,7 +164,7 @@ function finishIchidan(stem: string, c: ConjugationRequest): string {
   return stem + "た";
 }
 
-// ── Exception verb conjugation ───────────────────────────────────
+// exception conjugations
 
 interface ExvEntry {
   stem: string; // masu-stem
@@ -245,7 +245,7 @@ function conjugateExv(w: Word, c: ConjugationRequest): string {
     return c.polarity === "negative" ? e.teNeg : e.te;
   }
 
-  // Voice forms
+  // voice forms
   let dStem = "";
   switch (c.form) {
     case "potential":
@@ -263,7 +263,7 @@ function conjugateExv(w: Word, c: ConjugationRequest): string {
   }
   if (c.form && dStem) return finishIchidan(dStem, c);
 
-  // Plain conjugation
+  // plain conjugation
   if (c.polarity === "negative") {
     const neg = w.kana === "ある" ? "" : e.aStem;
     if (c.formality === "formal") {
@@ -278,7 +278,7 @@ function conjugateExv(w: Word, c: ConjugationRequest): string {
   return e.ta;
 }
 
-// ── Adjective conjugation ────────────────────────────────────────
+// adjective conjugations
 
 function conjugateAdj(w: Word, c: ConjugationRequest): string {
   const k = w.kana;
@@ -318,11 +318,11 @@ function conjugateAdj(w: Word, c: ConjugationRequest): string {
   return c.formality === "formal" ? base + "です" : base;
 }
 
-// ── Exception adjective (いい / かっこいい) conjugation ─────────
+// exception adjective conjugations
 
 function conjugateExa(w: Word, c: ConjugationRequest): string {
   const k = w.kana;
-  // Replace the second-to-last char with よ for non-present-affirmative forms
+  // replace the second-to-last char with よ for non-present-affirmative forms
   const yoStem = k.slice(0, -2) + "よ" + k.slice(-1);
   const yoIStem = yoStem.slice(0, -1);
 
@@ -344,7 +344,7 @@ function conjugateExa(w: Word, c: ConjugationRequest): string {
   return c.formality === "formal" ? base + "です" : base;
 }
 
-// ── Public API ───────────────────────────────────────────────────
+//public api
 
 export function conjugate(word: Word, request: ConjugationRequest): string {
   switch (word.type) {
@@ -361,7 +361,7 @@ export function conjugate(word: Word, request: ConjugationRequest): string {
   }
 }
 
-// ── Conjugation generation (which forms to quiz) ─────────────────
+//conjugation generator for quizzes
 
 export type VerbForm = "potential" | "passive" | "causative" | "causativePassive" | "imperative" | "volitional";
 export type AdjForm = "te" | "adverb" | "nominalized";
@@ -419,7 +419,7 @@ export function generateVerbConjugation(config: QuizConfig): ConjugationRequest 
     return req;
   }
 
-  // Pick a special form if available
+  // pick a special form if available
   if (hasForms && rng(2)) {
     req.form = pick(config.verbForms);
     if (req.form === "imperative") {
@@ -432,16 +432,16 @@ export function generateVerbConjugation(config: QuizConfig): ConjugationRequest 
     }
   }
 
-  // Tense
+  // tense
   if (hasTense) {
     const tenses = config.verbTenses.filter((t) => t !== "te") as ("present" | "past")[];
     req.tense = tenses.length === 1 ? tenses[0] : pick(tenses);
   }
 
-  // Polarity
+  // polarity
   req.polarity = config.verbPolarity.length === 1 ? config.verbPolarity[0] : pick(config.verbPolarity);
 
-  // Formality
+  // formality
   req.formality = config.verbFormality.length === 1 ? config.verbFormality[0] : pick(config.verbFormality);
 
   return req;
@@ -455,13 +455,13 @@ export function generateAdjConjugation(config: QuizConfig): ConjugationRequest {
   const hasNominalized = config.adjForms.includes("nominalized");
   const specialForms = [...(hasAdverb ? ["adverb"] : []), ...(hasNominalized ? ["nominalized"] : [])];
 
-  // Special forms
+  // special forms
   if (specialForms.length > 0 && rng(5)) {
     (req as any).form = pick(specialForms);
     return req;
   }
 
-  // Te-form
+  // te-form
   if (hasTeOption && rng(5)) {
     req.te = true;
     if (config.adjPolarity.includes("negative") && (!config.adjPolarity.includes("affirmative") || rng(2))) {
@@ -470,7 +470,7 @@ export function generateAdjConjugation(config: QuizConfig): ConjugationRequest {
     return req;
   }
 
-  // Tense
+  // tense
   const tenses = config.adjTenses.filter((t) => t !== "te") as ("present" | "past")[];
   if (tenses.length > 0) {
     req.tense = tenses.length === 1 ? tenses[0] : pick(tenses);
