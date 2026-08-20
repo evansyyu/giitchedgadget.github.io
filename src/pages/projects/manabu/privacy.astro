@@ -1,0 +1,101 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ManabuNavbar from '../../../components/manabu/ManabuNavbar.astro';
+import manabuIcon from '../../../assets/icons/manabuicon-light.png';
+import manabuIconDark from '../../../assets/icons/manabuicon-dark.png';
+---
+
+<Layout
+	title="privacy policy"
+	iconLightHref={manabuIcon.src}
+	iconDarkHref={manabuIconDark.src}
+	iconLightType="image/png"
+	iconDarkType="image/png"
+	appleTouchIconHref={manabuIcon.src}
+>
+	<div class="w-full z-50">
+		<ManabuNavbar />
+	</div>
+	<div class="mt-12 px-[clamp(1rem,16vw,12rem)] pb-20 font-['Georgia_Pro',Georgia,serif] text-[#222] dark:text-neutral-100">
+		<div class="max-w-4xl mx-auto">
+			<h1 class="text-4xl sm:text-5xl mb-4 text-center">Privacy Policy</h1>
+			<p class="text-center text-sm sm:text-base text-neutral-600 dark:text-neutral-400 mb-10">
+				Last updated: placeholder
+			</p>
+
+			<div class="space-y-6 text-base sm:text-lg leading-relaxed">
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">1. Overview</h2>
+					<p>Placeholder text.</p>
+					<p class="mt-3">Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">2. Information Collection and Use</h2>
+					<p>Placeholder text.</p>
+					<p class="mt-3">Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">3. Log Data</h2>
+					<p>Placeholder text.</p>
+					<p class="mt-3">Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">4. Analytics and Third-Party Services</h2>
+					<p>Placeholder text.</p>
+					<p class="mt-3">Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">5. Cookies and Similar Technologies</h2>
+					<p>Placeholder text.</p>
+					<p class="mt-3">Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">6. Business Transfers</h2>
+					<p>Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">7. Security</h2>
+					<p>Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">8. International Data Transfers</h2>
+					<p>Placeholder text.</p>
+					<p class="mt-3">Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">9. External Links</h2>
+					<p>Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">10. Children's Privacy</h2>
+					<p>Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">11. Changes to This Privacy Policy</h2>
+					<p>Placeholder text.</p>
+				</section>
+
+				<section class="rounded-2xl border border-neutral-200 dark:border-neutral-700 p-6 sm:p-7">
+					<h2 class="text-2xl sm:text-3xl mb-2">12. Contact</h2>
+					<p>Placeholder text.</p>
+				</section>
+			</div>
+		</div>
+	</div>
+</Layout>
+
+<style is:global>
+	html, body {
+		overscroll-behavior: none;
+	}
+</style>

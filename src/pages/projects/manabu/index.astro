@@ -1,0 +1,32 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import ManabuNavbar from '../../../components/manabu/ManabuNavbar.astro';
+import ManabuHero from '../../../components/manabu/ManabuHero.astro';
+import ManabuContent from '../../../components/manabu/ManabuContent.astro';
+import manabuIcon from '../../../assets/icons/manabuicon-light.png';
+import manabuIconDark from '../../../assets/icons/manabuicon-dark.png';
+---
+
+<Layout
+	title="manabu"
+	iconLightHref={manabuIcon.src}
+	iconLightType="image/png"
+	iconDarkHref={manabuIconDark.src}
+	iconDarkType="image/png"
+	appleTouchIconHref={manabuIcon.src}
+>
+	<div class="fixed top-0 left-0 w-full z-50">
+		<ManabuNavbar />
+	</div>
+	<div class="relative overscroll-none">
+		<ManabuHero />
+		<div class="h-screen" aria-hidden="true"></div>
+		<ManabuContent />
+	</div>
+</Layout>
+
+<style is:global>
+	html, body {
+		overscroll-behavior: none;
+	}
+</style>

@@ -1,0 +1,54 @@
+---
+import manabuLogo from '../../assets/icons/manabu-light.png';
+import manabuLogoDark from '../../assets/icons/manabu-dark.png';
+---
+
+<!-- flat placeholder hero colour; swap for artwork later -->
+<div id="manabu-hero" class="fixed top-0 left-0 w-full h-[100svh] z-0 overflow-hidden bg-[#efe9df] dark:bg-[#141414] font-['Georgia_Pro',Georgia,serif]">
+	<div class="absolute inset-0 hidden xl:flex justify-center lg:justify-end lg:pr-36">
+		<img
+			src={manabuLogo.src}
+			alt=""
+			class="h-[85%] mt-12 object-contain opacity-90 block dark:hidden"
+		/>
+		<img
+			src={manabuLogoDark.src}
+			alt=""
+			class="h-[85%] mt-12 object-contain opacity-90 hidden dark:block"
+		/>
+	</div>
+
+	<div id="manabu-hero-overlay" class="absolute inset-0"></div>
+
+	<div class="absolute inset-0 flex items-center justify-center lg:justify-start pointer-events-none">
+		<div id="manabu-hero-text" class="text-neutral-800 dark:text-gray-300 mt-24 w-full flex flex-col gap-4 items-center lg:items-start px-6 lg:px-12 pointer-events-auto">
+			<h1 class="text-5xl lg:text-7xl font-bold mt-24 text-center lg:text-left">
+				manabu
+			</h1>
+			<p class="text-2xl lg:text-3xl text-center lg:text-left">
+				Placeholder tagline goes here.
+			</p>
+			<p class="text-3xl lg:text-4xl font-bold text-center lg:text-left font-['Roboto',sans-serif]">
+				Placeholder.
+			</p>
+			<p class="text-3xl lg:text-4xl font-bold text-center lg:text-left font-['Roboto',sans-serif]">
+				Placeholder.
+			</p>
+		</div>
+	</div>
+
+	<div class="absolute bottom-8 inset-x-0 flex flex-col items-center text-neutral-800 dark:text-gray-300 text-center font-['Roboto',sans-serif] xl:inset-x-auto xl:left-54 xl:items-start xl:text-left">
+		<p class="text-2xl mb-2 font-['Georgia_Pro',Georgia,serif]">scroll down</p>
+		<div class="animate-bounce self-center">↓</div>
+	</div>
+</div>
+
+<style is:global>
+	#manabu-hero-overlay {
+		pointer-events: none;
+	}
+
+	#manabu-hero-text {
+		transition: opacity 0.2s ease-out;
+	}
+</style>

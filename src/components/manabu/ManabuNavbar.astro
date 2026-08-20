@@ -1,0 +1,176 @@
+---
+import sunIcon from '../../assets/icons/sun.svg';
+import moonIcon from '../../assets/icons/moon.svg';
+import manabuIcon from '../../assets/icons/manabu-light.png';
+import manabuIconDark from '../../assets/icons/manabu-dark.png';
+---
+
+<!-- Mobile: burger top left, logo top center -->
+<header id="manabu-mobile-header" class="relative z-50 w-full py-6 flex items-center justify-between px-6 sm:hidden bg-transparent font-refrigerator transition-colors duration-300" aria-label="Mobile header">
+	<button
+		id="manabu-nav-burger"
+		type="button"
+		class="nav-burger shrink-0 w-8 h-[26px] border-0 bg-transparent p-0 cursor-pointer"
+		aria-label="Toggle menu"
+		aria-expanded="false"
+	>
+		<span></span>
+		<span></span>
+		<span></span>
+	</button>
+	<a
+		href="/projects/manabu/"
+		class="absolute left-1/2 -translate-x-1/2 inline-block"
+		aria-label="Home"
+	>
+		<img src={manabuIcon.src} alt="" class="h-10 w-auto block dark:hidden" />
+		<img src={manabuIconDark.src} alt="" class="h-10 w-auto hidden dark:block" />
+	</a>
+	<div class="flex items-center gap-3 shrink-0 w-28 justify-end">
+		<div class="relative icon-button-wrap rounded-full aspect-square">
+			<a
+				href="/"
+				class="group p-2 rounded-full aspect-square bg-transparent inline-flex items-center justify-center"
+				aria-label="Home"
+			>
+				<img src="/logo.svg" alt="" class="w-8 h-8 block dark:invert transition-opacity duration-200" />
+			</a>
+		</div>
+		<button
+			type="button"
+			class="dark-mode-toggle group p-2 rounded-full border-0 cursor-pointer"
+			aria-label="Toggle dark mode"
+		>
+			<img src={typeof sunIcon === 'string' ? sunIcon : sunIcon.src} alt="" class="sun-icon w-8 h-8 block dark:hidden transition-opacity duration-200 group-hover:opacity-60" aria-hidden="true" />
+			<img src={typeof moonIcon === 'string' ? moonIcon : moonIcon.src} alt="" class="moon-icon w-8 h-8 hidden dark:block dark:invert transition-opacity duration-200 group-hover:opacity-60" aria-hidden="true" />
+		</button>
+	</div>
+</header>
+
+<!-- Mobile nav overlay -->
+<div
+	id="manabu-mobile-nav-overlay"
+	class="fixed inset-0 z-40 flex flex-col pt-24 pb-12 px-6 bg-white dark:bg-neutral-900 opacity-0 pointer-events-none transition-opacity duration-300 sm:hidden font-refrigerator"
+	aria-hidden="true"
+>
+	<nav class="flex-1 flex flex-col justify-evenly items-center min-h-0" aria-label="Mobile menu">
+		<ul class="list-none m-0 p-0 flex flex-col justify-evenly items-center gap-4 flex-1 min-h-0 w-full max-w-md">
+			<li class="flex flex-col gap-2 items-center">
+				<a href="/projects/manabu/changelog" class="mobile-nav-main-item mobile-nav-link text-[#333] dark:text-neutral-200 text-4xl py-2 no-underline hover:underline text-center">Changelog</a>
+			</li>
+			<li class="flex flex-col gap-2 items-center">
+				<a href="/projects/manabu/privacy" class="mobile-nav-main-item mobile-nav-link text-[#333] dark:text-neutral-200 text-4xl py-2 no-underline hover:underline text-center">Privacy Policy</a>
+			</li>
+			<li class="flex flex-col gap-2 items-center">
+				<a href="/projects/manabu/eula" class="mobile-nav-main-item mobile-nav-link text-[#333] dark:text-neutral-200 text-4xl py-2 no-underline hover:underline text-center">EULA</a>
+			</li>
+		</ul>
+	</nav>
+</div>
+
+<!-- Desktop: full nav. Hidden below sm, visible from sm. -->
+<nav id="manabu-navbar" class="w-full p-6 hidden sm:flex items-center font-refrigerator bg-transparent transition-colors duration-300" aria-label="Main">
+	<a
+		href="/projects/manabu/"
+		class="shrink-0 inline-block transition-transform duration-200 ease-out scale-100 hover:scale-105"
+		aria-label="Home"
+	>
+		<img src={manabuIcon.src} alt="" class="h-10 w-auto block dark:hidden" />
+		<img src={manabuIconDark.src} alt="" class="h-10 w-auto hidden dark:block" />
+	</a>
+	<ul class="flex flex-1 list-none m-0 p-0 items-center justify-center gap-x-0 sm:gap-x-[clamp(1.5rem,4vw,8rem)]">
+		<li class="min-w-32 text-center">
+			<a
+				href="/projects/manabu/changelog"
+				class="block text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline hover:underline hover:text-gray-400 dark:hover:text-neutral-400 text-center"
+			>
+				Changelog
+			</a>
+		</li>
+		<li class="min-w-32 text-center">
+			<a
+				href="/projects/manabu/privacy"
+				class="block text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline hover:underline hover:text-gray-400 dark:hover:text-neutral-400 text-center"
+			>
+				Privacy Policy
+			</a>
+		</li>
+		<li class="min-w-32 text-center">
+			<a
+				href="/projects/manabu/eula"
+				class="block text-[#333] dark:text-neutral-200 text-2xl py-3 px-2 no-underline hover:underline hover:text-gray-400 dark:hover:text-neutral-400 text-center"
+			>
+				EULA
+			</a>
+		</li>
+	</ul>
+	<div class="flex items-center gap-3 shrink-0 pl-6">
+		<div class="relative icon-button-wrap">
+			<a
+				href="/"
+				class="group p-2 rounded-full aspect-square bg-transparent inline-flex items-center justify-center transition-transform duration-300 scale-100 hover:animate-[logo-hover_2s_ease-in-out_infinite]"
+				aria-label="Home"
+			>
+				<img src="/logo.svg" alt="" class="w-7 h-7 block dark:invert transition-opacity duration-200 bg-transparent" />
+			</a>
+		</div>
+		<button
+			type="button"
+			class="dark-mode-toggle group p-2 rounded-full border-0 cursor-pointer"
+			aria-label="Toggle dark mode"
+		>
+			<img src={typeof sunIcon === 'string' ? sunIcon : sunIcon.src} alt="" class="sun-icon w-8 h-8 block dark:hidden transition-opacity duration-200 group-hover:opacity-60" aria-hidden="true" />
+			<img src={typeof moonIcon === 'string' ? moonIcon : moonIcon.src} alt="" class="moon-icon w-8 h-8 hidden dark:block dark:invert transition-opacity duration-200 group-hover:opacity-60" aria-hidden="true" />
+		</button>
+	</div>
+</nav>
+
+<script>
+	const burger = document.getElementById('manabu-nav-burger');
+	const overlay = document.getElementById('manabu-mobile-nav-overlay');
+	if (burger && overlay) {
+		burger.addEventListener('click', () => {
+			const isOpen = burger.classList.toggle('open');
+			burger.setAttribute('aria-expanded', String(isOpen));
+			overlay.classList.toggle('open', isOpen);
+			overlay.setAttribute('aria-hidden', String(!isOpen));
+			document.body.classList.toggle('overflow-hidden', isOpen);
+			document.documentElement.classList.toggle('overflow-hidden', isOpen);
+		});
+	}
+
+	const SCROLL_THRESHOLD = 500;
+	const mobileHeader = document.getElementById('manabu-mobile-header');
+	const desktopNav = document.getElementById('manabu-navbar');
+
+	function updateNavBg() {
+		const scrolled = window.scrollY > SCROLL_THRESHOLD;
+		const isDark = document.documentElement.classList.contains('dark');
+		const bg = scrolled
+			? (isDark ? 'rgb(23,23,23)' : 'rgb(255,255,255)')
+			: 'transparent';
+		const color = scrolled
+			? (isDark ? '#e5e5e5' : '#000')
+			: '';
+		[mobileHeader, desktopNav].forEach((el) => {
+			if (!el) return;
+			el.style.backgroundColor = bg;
+			el.style.color = color;
+		});
+	}
+
+	window.addEventListener('scroll', updateNavBg, { passive: true });
+	updateNavBg();
+
+	let darkModeCooldownUntil = 0;
+	const DARK_MODE_COOLDOWN_MS = 500;
+	document.querySelectorAll('.dark-mode-toggle').forEach((btn: Element) => {
+		btn.addEventListener('click', () => {
+			if (Date.now() < darkModeCooldownUntil) return;
+			darkModeCooldownUntil = Date.now() + DARK_MODE_COOLDOWN_MS;
+			const isDark = document.documentElement.classList.toggle('dark');
+			localStorage.setItem('darkMode', isDark ? 'true' : 'false');
+			updateNavBg();
+		});
+	});
+</script>
